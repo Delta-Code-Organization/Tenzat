@@ -2,34 +2,34 @@
     ViewBag.Title = "SetHotList";
     Layout = "~/Views/Shared/MasterPage.cshtml";
 }
-
+@using Tenzat.Models;
+<script src="~/Scripts/SetHotList.js"></script>
 <div class="listmain1">
     <div class="searchcont">
     <label class="search"> Searching ...</label>
         </div>
         <div class="srchcont">
           <label class="searchby">Search by Title :</label>  
-    <input type="text" class="tbox" />
+    <input type="text" class="tbox" id="tboxx"/>
         </div>
     <div class="srchcont">
         <label class="searchby">Search by Tag :</label> 
-     <select class="droplist1">
-     <option>سياسه</option>
-      <option> مرأه</option>
-      <option>مال وأعمال</option>
+     <select class="droplist1" id="droptag">
+       @{
+                int Val = 0;
+                foreach (string Tag in ViewBag.Tags)
+                {
+     <option value="3000"></option>
+      <option value="@Val"> @Tag</option>
+      Val++;
+      }
+      }
  </select>
     </div>
     <div class="srchbtncont">
-        <input type="submit" value="Search" class="srchbtn" />
+        <input type="submit" value="Search" class="srchbtn" onclick="MakeHot()" />
     </div>
 </div>
-<div class="itemview1">
-<div class="item">
-<img src="~/content/imgs/lists/l7.png"/>
-<h2>رجل معلق فوق النهر</h2>
-<span>صورة رجل معلق فوق النهر بقدميه دون خوف صورة رجل معلق فوق النهر بقدميه دون خوف صورة رجل معلق فوق النهر بقدميه دون خوف صورة رجل معلق فوق النهر بقدميه دون خوف</span>
-    <div class="hotset">
-    <input type="submit" value="Hot List" class="setbtn"/>
-</div>
-    </div>
+<div class="searchalllists">
+
     </div>

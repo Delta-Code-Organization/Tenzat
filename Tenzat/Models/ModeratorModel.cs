@@ -50,5 +50,33 @@ namespace Tenzat.Models
                        select m).ToList();
             return all;
         }
+
+        public Returner RemoveAdmin()
+        {
+            var removeAdmin = db.Moderators.Where(p => p.ID == this.ID).ToList().SingleOrDefault();
+            db.Moderators.Remove(removeAdmin);
+            db.SaveChanges();
+            return new Returner
+            {
+                Data = removeAdmin,
+                Message = Msgs.Admin_Deleted_Successfully
+            };
+        }
+
+        public Returner EditAdmin()
+        {
+            var Admin = db.Moderators.Where(p=> p.ID == this.ID).SingleOrDefault();
+            Admin.ApproveLists = this.ApproveLists;
+            Admin.CreateAdmin = this.CreateAdmin;
+            Admin.CreateList = this.CreateList;
+            Admin.Email = this.Email;
+            Admin.password = this.password;
+            Admin.SetHotLists = this.SetHotLists;
+            db.SaveChanges();
+            return new Returner
+            {
+                Message = Msgs.Admin_Updated_Successfully
+            };
+        }
     }
 }

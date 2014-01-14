@@ -17,7 +17,7 @@
             <img id="@m.ID" class="ModeratorToolBtn" onclick="AddModeratorPopup(@m.ID);" title="تعديل المدير" src="~/content/imgs/edit.png" />
         </div>
         <div class="moderatorBtnCont @m.ID" style="box-shadow: 5px 0px 10px -2px grey;">
-            <img id="@m.ID" onclick="" class="ModeratorToolBtn"  title="حذف المدير" src="~/content/imgs/cancel.png" />
+            <img id="@m.ID" onclick="DeleteModerator(@m.ID)" class="ModeratorToolBtn"  title="حذف المدير" src="~/content/imgs/cancel.png" />
         </div>
         }
     }
@@ -47,7 +47,7 @@
                 </select>*@
                 
                 <label class="formLabels"  for="ismod" style="margin-right:10px;font-size:15px;float:right;">اضافة مدير</label>
-                <input  id="ismod" type="checkbox" value="1" style="margin-top:15px;float:right;margin-right:5px;">
+                <input  id="ismod" type="checkbox" style="margin-top:15px;float:right;margin-right:5px;">
                 <label class="formLabels"   for="Cat" style="margin-right:10px;font-size:15px;float:right;">اضافة قائمة</label>
                 <input id="Cat" type="checkbox" style="margin-top:15px;float:right;margin-right:5px;">
                 <label class="formLabels"   for="SRC" style="margin-right:10px;font-size:15px;float:right;">اضافة قائمة ساخنة</label>
@@ -55,7 +55,7 @@
                 <label class="formLabels"   for="Env" style="margin-right:10px;font-size:15px;float:right;">تأكيد القوائم</label>
                 <input id="Env" type="checkbox" style="margin-top:15px;float:right;margin-right:5px;">
                     
-                <input id="AddmodSubmit" type="submit" class="addmodBtn" value="تعديل" />
+                <input id="AddmodSubmit" type="button" onclick="EditAdmin()" class="addmodBtn" value="تعديل" />
             </form>
         </div>
 

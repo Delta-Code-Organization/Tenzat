@@ -11,7 +11,8 @@ using System.Web.Script.Serialization;
 
 namespace Tenzat.Controllers
 {
-    public class Videos {
+    public class Videos
+    {
         public int Order { get; set; }
         public string URL { get; set; }
     }
@@ -29,18 +30,18 @@ namespace Tenzat.Controllers
 
         public string logadmin(string _mail, string _pass)
         {
-           Moderator mod = new Moderator();
-             var res = mod.ModeratorLogin(_mail, _pass);
-             var msgres = res.Message.ShowMsg();
-             var nmod = res.Data;
-             mod = (Moderator)nmod;
-             if (msgres != "Username_Or_Password_Is_Incorrect")
-             {
-                 Session.Clear();
-                 Session["moderator"] = mod;
-                 return msgres;
-             }
-             return msgres;
+            Moderator mod = new Moderator();
+            var res = mod.ModeratorLogin(_mail, _pass);
+            var msgres = res.Message.ShowMsg();
+            var nmod = res.Data;
+            mod = (Moderator)nmod;
+            if (msgres != "Username_Or_Password_Is_Incorrect")
+            {
+                Session.Clear();
+                Session["moderator"] = mod;
+                return msgres;
+            }
+            return msgres;
         }
 
         public ActionResult ControlPanel()
@@ -55,7 +56,7 @@ namespace Tenzat.Controllers
             LOM = M.allmod();
             ViewBag.Moderators = LOM;
             return View();
-         }
+        }
 
         public ActionResult CreateList()
         {
@@ -64,7 +65,7 @@ namespace Tenzat.Controllers
             return View();
         }
 
-        public string AddList(string ListTitle, string listtype, string ImageURL, string VideoURL, int Tag, string[] ListItems,string VideosUrls)
+        public string AddList(string ListTitle, string listtype, string ImageURL, string VideoURL, int Tag, string[] ListItems, string VideosUrls)
         {
             JavaScriptSerializer JSS = new JavaScriptSerializer();
             Videos[] ArrayOfVideos = JSS.Deserialize<Videos[]>(VideosUrls);
@@ -104,7 +105,7 @@ namespace Tenzat.Controllers
                 skip += 2;
             }
             List L = new List();
-            L.CreatedBy = (Session["moderator"]as Moderator).ID;
+            L.CreatedBy = (Session["moderator"] as Moderator).ID;
             L.FbShares = 0;
             L.Hot = false;
             string Path;
@@ -159,7 +160,7 @@ namespace Tenzat.Controllers
             return View();
         }
 
-        public string CreatModerator(string _email, string _paass,Boolean _manage,Boolean _create,Boolean _hot,Boolean _set)
+        public string CreatModerator(string _email, string _paass, Boolean _manage, Boolean _create, Boolean _hot, Boolean _set)
         {
             Moderator moder = new Moderator();
             moder.Email = _email;
@@ -206,7 +207,7 @@ namespace Tenzat.Controllers
                 ListItem LI = new ListItem();
                 LI.Order = orderid;
                 LI.Drawable = Path;
-                if (LOLI.Any(p=>p.Order == orderid))
+                if (LOLI.Any(p => p.Order == orderid))
                 {
                     ListItem OldList = new ListItem();
                     OldList = LOLI.Where(p => p.Order == orderid).SingleOrDefault();
@@ -229,42 +230,42 @@ namespace Tenzat.Controllers
             return Path;
         }
 
-
-        //public Returner Search(string _title, string _tag)
-        //{
-       
-        //    List search = new List();
-        //    if (search.Tag = _tag)
-        //    {
-        //        var res = search.SearchByTitle(_title);
-        //        return res;
-        //    }
-        //}
-
-        public List<List> serchtitle(string _title)
+        public JsonResult search(string _title, int _tag)
         {
             List l = new List();
-            var res = ((l.SearchByTitle(_title)).Data) as List<List>;
-            ViewBag.searchrestitle = res;
-            return res;
-        }
-        
-        public List<List> serchtag(int _tag)
-        {
-            List l = new List(); 
-            var res = ((l.SearchByTag(_tag)).Data) as List<List>;
-            ViewBag.searchrestag = res;
-            return res;
-        }
-
-        public List<List> SearchTagTitle(string _title, int _tag)
-        {
-            List l = new List();
-            var res = ((l.SearchByTItleTag(_title,_tag)).Data) as List<List>;
-            ViewBag.searchrestagtitle = res; 
-            return res;
+            if (_title != "" && _tag == 3000)
+            {
+                return l.SearchByTitle(_title).DataInJSON;
+            }
+            else if (_title == "" && _tag != 3000)
+            {
+                return l.SearchByTag(_tag).DataInJSON;
+            }
+            else if (_title != "" && _tag != 3000)
+            {
+                return l.SearchByTItleTag(_title, _tag).DataInJSON;
+            }
+            return new JsonResult();
         }
 
-        
+        public string DeleteModerator(int _ID)
+        {
+            Moderator M = new Moderator();
+            M.ID = _ID;
+            return M.RemoveAdmin().Message.ShowMsg();
+        }
+
+        public string UpdateAdmin(int _ID, string Email, string Password, bool CreateAdmin, bool SethotList, bool CreateList, bool ApproveList)
+        {
+            Moderator M = new Moderator();
+            M.ID = _ID;
+            M.Email = Email;
+            M.ApproveLists =ApproveList ;
+            M.CreateAdmin = CreateAdmin ;
+            M.CreateList = CreateList ;
+            M.SetHotLists = SethotList ;
+            M.password = Password;
+            return M.EditAdmin().Message.ShowMsg();
+        }
     }
 }
