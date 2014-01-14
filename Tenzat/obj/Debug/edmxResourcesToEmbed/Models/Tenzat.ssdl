@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TenzatDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="TenzatDBModelStoreContainer">
+    <EntitySet Name="ListItems" EntityType="TenzatDBModel.Store.ListItems" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Lists" EntityType="TenzatDBModel.Store.Lists" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Moderators" EntityType="TenzatDBModel.Store.Moderators" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sysdiagrams" EntityType="TenzatDBModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_ListItems_Lists" Association="TenzatDBModel.Store.FK_ListItems_Lists">
+      <End Role="Lists" EntitySet="Lists" />
+      <End Role="ListItems" EntitySet="ListItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Lists_Moderators" Association="TenzatDBModel.Store.FK_Lists_Moderators">
+      <End Role="Moderators" EntitySet="Moderators" />
+      <End Role="Lists" EntitySet="Lists" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ListItems">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ListID" Type="int" />
+    <Property Name="Title" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Drawable" Type="nvarchar(max)" />
+    <Property Name="ItemType" Type="int" />
+    <Property Name="MoreText" Type="nvarchar(max)" />
+    <Property Name="Order" Type="int" />
+  </EntityType>
+  <EntityType Name="Lists">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="nvarchar(max)" />
+    <Property Name="image" Type="nvarchar(max)" />
+    <Property Name="ListDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="Views" Type="int" />
+    <Property Name="FbShares" Type="int" />
+    <Property Name="TwitterShares" Type="int" />
+    <Property Name="Rank" Type="int" />
+    <Property Name="Hot" Type="bit" />
+    <Property Name="ListType" Type="int" />
+    <Property Name="Status" Type="int" />
+    <Property Name="Tag" Type="int" />
+  </EntityType>
+  <EntityType Name="Moderators">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="password" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreateAdmin" Type="bit" />
+    <Property Name="CreateList" Type="bit" />
+    <Property Name="SetHotLists" Type="bit" />
+    <Property Name="ApproveLists" Type="bit" />
+    <Property Name="Status" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_ListItems_Lists">
+    <End Role="Lists" Type="TenzatDBModel.Store.Lists" Multiplicity="0..1" />
+    <End Role="ListItems" Type="TenzatDBModel.Store.ListItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lists">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ListItems">
+        <PropertyRef Name="ListID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Lists_Moderators">
+    <End Role="Moderators" Type="TenzatDBModel.Store.Moderators" Multiplicity="0..1" />
+    <End Role="Lists" Type="TenzatDBModel.Store.Lists" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Moderators">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Lists">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

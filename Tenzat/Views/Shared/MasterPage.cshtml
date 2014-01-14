@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/content/css/style.css" rel="stylesheet" />
+    <link href="~/content/css/Mobile.css" media="handheld,screen and (min-width:0px) and (max-width:450px)" rel="stylesheet" type="text/css" />
+    <link href="~/content/css/ListsViewMedia.css" media="handheld,screen and (min-width:450px) and (max-width:820px)" rel="stylesheet" type="text/css" />
+    <link href='http://fonts.googleapis.com/css?family=Sigmar+One' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/scripts/jquery.validate.min.js"></script>
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div class="toppanel">
+        <a href="#">
+            <span class="logo">Tenzat</span>
+        </a>
+        <span class="social">
+            <a href="#">
+                <img src="/content/imgs/facebook.png" />
+            </a>
+            <a href="#">
+                <img src="/content/imgs/twitter.png" />
+            </a>
+        </span>
+        <span class="sort">
+            <a href="#">
+                <img src="/content/imgs/recent.svg" />
+            </a>
+            <a href="#">
+                <img src="/content/imgs/popular.png" />
+            </a>
+        </span>
+    </div>
+    <div class="RenderBody">
+        @RenderBody()
+    </div>
+</body>
+</html>

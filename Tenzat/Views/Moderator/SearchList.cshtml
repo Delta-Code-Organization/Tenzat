@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "SearchList";
+    Layout = "~/Views/Shared/MasterPage.cshtml";
+    }
+@using Tenzat.Models;
+<script src="~/Scripts/SearchList.js"></script>
+<div class="listmain1">
+    <div class="searchcont">
+    <label class="search"> Searching ...</label>
+        </div>
+        <div class="srchcont">
+          <label class="searchby">Search by Title :</label>  
+    <input type="text" class="tbox" id="tboxx" />
+        </div>
+    <div class="srchcont">
+        <label class="searchby">Search by Tag :</label> 
+     <select class="droplist1" id="droptag">
+          @{
+                int Val = 0;
+                foreach (string Tag in ViewBag.Tags)
+                {
+     <option value="3000"></option>
+      <option value="@Val"> @Tag</option>
+      Val++;
+      }
+      }
+     
+ </select>
+    </div>
+    <div class="srchbtncont">
+        <input type="submit" value="Search" class="srchbtn" onclick="searching()" />
+    </div>
+</div>
+<div class="searchalllists" >
+
+</div>

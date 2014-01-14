@@ -1,0 +1,441 @@
+﻿@{
+    ViewBag.Title = "CreateList";
+    Layout = "~/Views/Shared/MasterPage.cshtml";
+}
+<script src="~/Scripts/CreateList.js"></script>
+<script src="~/content/jq/jq.js"></script>
+<script type="text/javascript">
+    var First = true;
+    var ChangedID;
+
+    function OpenFileDialog(id) {
+        $(".FileDialog").click();
+        ChangedID = id;
+    }
+
+    function Show() {
+        if (First == true) {
+            $('#Vid').show();
+            $('#ListImg').hide();
+                $('.VideoItemElements').show();
+                $('.ImageItemElements').hide();
+                $('.rds').hide();
+            First = false;
+        }
+        else {
+            $('#Vid').hide();
+            $('#ListImg').show();
+                $('.VideoItemElements').hide();
+                $('.ImageItemElements').show();
+                $('.rds').show();
+            First = true;
+        }
+    }
+
+
+    $(document).ready(function () {
+        document.getElementById("RImg").checked = true
+        var ImageInBase64;
+
+        $("#ListImg").change(function (e) {
+            readImagesFromUploader(e);
+            var interval = setInterval(function () {
+                if (ImageInBase64 != undefined && ImageInBase64 != null) {
+                    $('#ImageList').val(ImageInBase64);
+                    clearInterval(interval);
+                }
+            }, 1000);
+        });
+
+        $("#FileImage").change(function (e) {
+            readImagesFromUploader(e);
+            var interval = setInterval(function () {
+                if (ImageInBase64 != undefined && ImageInBase64 != null) {
+                    $('#Image' + ChangedID).val(ImageInBase64);
+                    clearInterval(interval);
+                    UploadImage(ChangedID);
+                }
+            }, 1000);
+        });
+
+        function UploadImage(id) {
+            var orderid = id;
+            var imageinbase = $('#Image' + id).val();
+            var data = { 'orderid': orderid, 'ImageBase64': imageinbase };
+            $.ajax({
+                url: '/Moderator/UploadImage',
+                type: 'post',
+                data: data,
+                success: function (data) {
+                    $('#img' + id).attr('src', data);
+                },
+                error: function (data) {
+                    alert(data.responseText);
+                }
+            });
+        }
+
+        function readImage(file, event) {
+            ImageInBase64 = event.target.result.replace("data:image/png;base64,", "");
+            ImageInBase64 = ImageInBase64.replace("data:image/jpeg;base64,", "");
+            ImageInBase64 = ImageInBase64.replace("data:image/jpg;base64,", "");
+            ImageInBase64 = ImageInBase64.replace("data:image/gif;base64,", "");
+        }
+
+        function readImages(event) {
+            var files = event.originalEvent.dataTransfer.files;
+            $.each(files, function (index, file) {
+                var fileReader = new FileReader();
+                fileReader.onload = (function (file) {
+                    return function (event) {
+                        return readImage(file, event);
+                    }
+                })(file);
+                fileReader.readAsDataURL(file);
+            });
+        }
+
+        function readImagesFromUploader(event) {
+            var files = event.target.files;
+            $.each(files, function (index, file) {
+                var fileReader = new FileReader();
+                fileReader.onload = (function (file) {
+                    return function (event) {
+                        return readImage(file, event);
+                    }
+                })(file);
+                fileReader.readAsDataURL(file);
+            });
+        }
+
+    });
+   
+    function ChangeImgVid(id) {
+        var counter = id.substr(2, 1);
+        if (id.indexOf('10') != -1) {
+            counter = 10;
+        }
+        if (id.indexOf('vd') != -1) {
+            $('#VideoItemElements' + counter).show();
+            $('#ImageItemElements' + counter).hide();
+        }
+        else {
+            $('#VideoItemElements' + counter).hide();
+            $('#ImageItemElements' + counter).show();
+        }
+    }
+</script>
+<form id="createlist">
+    <h2 class="listitemheader">Add List ....</h2>
+    <div class="allcont">
+        <div class="defcont">
+            <label class="titles">List Title :</label>
+            <input type="text" class="textbox1" id="ListTitle" name="listtitl" />
+        </div>
+        <div class="defcont1">
+            <div class="imgsrc">
+                <label class="titles">Image/Video path :</label>
+                image 
+                <input type="radio" id="RImg" name="radio" onchange="Show()" class="rbtn1" checked />
+                video
+                <input type="radio" name="radio" id="RVid" class="rbtn1" onchange="Show()" />
+            </div>
+            <div class="vidsrc">
+                <input id="Vid" type="text" class="ttbox" />
+                <input id="ListImg" type="file" class="tebox" />
+            </div>
+            <input type="hidden" id="ImageList" value="" />
+        </div>
+
+        <div class="defcont">
+            <label class="titles">Tag : </label>
+            <select class="droplist" name="tagdroplist" id="droptag">
+                @{
+                    int Val = 0;
+                    foreach (string Tag in ViewBag.Tags)
+                    {
+                    <option></option>
+                    <option value="@Val">@Tag</option>
+                        Val++;
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    <!-- listitem-->
+
+    <h2 class="listitemheader1">Add List Items ....</h2>
+    <div class="itemview">
+        <div class="item">
+            <div class="ImageOverlay">
+                <a class="ImageItemElements" id="ImageItemElements1" href="javascript:OpenFileDialog(1);">
+                    <img style="float: right;width: 100%;height: 100%;" src="~/content/imgs/file-upload.jpg" id="img1" />
+                </a>
+                <div class="VideoItemElements" id="VideoItemElements1">
+                    <label class="vurlLabel">Video URL :</label>
+                    <input id="LIVID1" type="text" class="vurl" placeholder="Enter Video URL" />
+                </div>
+            </div>
+            <h2>
+                <input type="text" class="txtbx" placeholder="Enter the title" id="itemtitle1" name="il1" /></h2>
+            <span class="order">1</span>
+            <span>
+                <textarea class="txtbxdetails" placeholder="Enter the description" id="details1" name="dt1"></textarea></span>
+            <input type="hidden" id="Image1" value="" />
+            <div class="rds">
+                Image
+        <input id="imgItemR" type="radio" name="r1" checked onchange="ChangeImgVid('im1')" />
+                Video
+        <input id="vidItemR" type="radio" name="r1" onchange="ChangeImgVid('vd1')" />
+            </div>
+        </div>
+    </div>
+
+
+    <div class="itemview">
+        <div class="item" id="IMG2">
+             <div class="ImageOverlay">
+                <a class="ImageItemElements" id="ImageItemElements2"  href="javascript:OpenFileDialog(2);">
+                    <img style="float: right;width: 100%;height: 100%;" src="~/content/imgs/file-upload.jpg" id="img2" />
+                </a>
+                <div class="VideoItemElements" id="VideoItemElements2">
+                    <label class="vurlLabel">Video URL :</label>
+                    <input id="LIVID2" type="text" class="vurl" placeholder="Enter Video URL"/>
+                </div>
+            </div>
+            <h2>
+                <input type="text" class="txtbx" placeholder="Enter the title" id="itemtitle2" name="il2" /></h2>
+            <span class="order">2</span>
+            <span>
+                <textarea class="txtbxdetails" placeholder="Enter the description" id="details2" name="dt2"></textarea></span>
+            <input type="hidden" id="Image2" value="" />
+             <div class="rds">
+                Image
+        <input type="radio"  id="ib2" name="r2" checked onchange="ChangeImgVid('im2')" />
+                Video
+        <input type="radio" id="vb2" name="r2" onchange="ChangeImgVid('vd2')" />
+            </div>
+        </div>
+    </div>
+
+
+    <div class="itemview">
+        <div class="item" id="IMG3">
+              <div class="ImageOverlay">
+                <a class="ImageItemElements" id="ImageItemElements3" href="javascript:OpenFileDialog(3);">
+                    <img style="float: right;width: 100%;height: 100%;" src="~/content/imgs/file-upload.jpg" id="img3" />
+                </a>
+                <div class="VideoItemElements" id="VideoItemElements3">
+                    <label class="vurlLabel">Video URL :</label>
+                    <input id="LIVID3" type="text" class="vurl" placeholder="Enter Video URL" />
+                </div>
+            </div>
+            <h2>
+                <input type="text" class="txtbx" placeholder="Enter the title" id="itemtitle3" name="il3" /></h2>
+            <span class="order">3</span>
+            <span>
+                <textarea class="txtbxdetails" placeholder="Enter the description" id="details3" name="dt3"></textarea></span>
+            <input type="hidden" id="Image3" value="" />
+             <div class="rds">
+                Image
+        <input type="radio" name="r3" checked onchange="ChangeImgVid('im3')" />
+                Video
+        <input type="radio" name="r3" onchange="ChangeImgVid('vd3')" />
+            </div>
+        </div>
+    </div>
+
+
+    <div class="itemview">
+        <div class="item" id="IMG4">
+             <div class="ImageOverlay">
+                <a class="ImageItemElements" id="ImageItemElements4" href="javascript:OpenFileDialog(4);">
+                    <img style="float: right;width: 100%;height: 100%;" src="~/content/imgs/file-upload.jpg" id="img4" />
+                </a>
+                <div class="VideoItemElements" id="VideoItemElements4">
+                    <label class="vurlLabel">Video URL :</label>
+                    <input id="LIVID4" type="text" class="vurl" placeholder="Enter Video URL" />
+                </div>
+            </div>
+            <h2>
+                <input type="text" class="txtbx" placeholder="Enter the title" id="itemtitle4" name="il4" /></h2>
+            <span class="order">4</span>
+            <span>
+                <textarea class="txtbxdetails" placeholder="Enter the description" id="details4" name="dt4"></textarea></span>
+            <input type="hidden" id="Image4" value="" />
+             <div class="rds">
+                Image
+        <input type="radio" name="r4" checked onchange="ChangeImgVid('im4')" />
+                Video
+        <input type="radio" name="r4" onchange="ChangeImgVid('vd4')" />
+            </div>
+        </div>
+    </div>
+
+
+    <div class="itemview">
+        <div class="item" id="IMG5">
+             <div class="ImageOverlay">
+                <a class="ImageItemElements" id="ImageItemElements5" href="javascript:OpenFileDialog(5);">
+                    <img style="float: right;width: 100%;height: 100%;" src="~/content/imgs/file-upload.jpg" id="img5" />
+                </a>
+                <div class="VideoItemElements" id="VideoItemElements5">
+                    <label class="vurlLabel">Video URL :</label>
+                    <input id="LIVID5" type="text" class="vurl" placeholder="Enter Video URL" />
+                </div>
+            </div>
+            <h2>
+                <input type="text" class="txtbx" placeholder="Enter the title" id="itemtitle5" name="il5" /></h2>
+            <span class="order">5</span>
+            <span>
+                <textarea class="txtbxdetails" placeholder="Enter the description" id="details5" name="dt5"></textarea></span>
+            <input type="hidden" id="Image5" value="" />
+             <div class="rds">
+                Image
+        <input type="radio" name="r5" checked onchange="ChangeImgVid('im5')" />
+                Video
+        <input type="radio" name="r5" onchange="ChangeImgVid('vd5')" />
+            </div>
+        </div>
+    </div>
+
+
+    <div class="itemview">
+        <div class="item" id="IMG6">
+             <div class="ImageOverlay">
+                <a class="ImageItemElements" id="ImageItemElements6" href="javascript:OpenFileDialog(6);">
+                    <img style="float: right;width: 100%;height: 100%;" src="~/content/imgs/file-upload.jpg" id="img6" />
+                </a>
+                <div class="VideoItemElements" id="VideoItemElements6">
+                    <label class="vurlLabel">Video URL :</label>
+                    <input id="LIVID6" type="text" class="vurl" placeholder="Enter Video URL" />
+                </div>
+            </div>
+            <h2>
+                <input type="text" class="txtbx" placeholder="Enter the title" id="itemtitle6" name="il6" /></h2>
+            <span class="order">6</span>
+            <span>
+                <textarea class="txtbxdetails" placeholder="Enter the description" id="details6" name="dt6"></textarea></span>
+            <input type="hidden" id="Image6" value="" />
+             <div class="rds">
+                Image
+        <input type="radio" name="r6" checked onchange="ChangeImgVid('im6')" />
+                Video
+        <input type="radio" name="r6" onchange="ChangeImgVid('vd6')" />
+            </div>
+        </div>
+    </div>
+
+
+    <div class="itemview">
+        <div class="item" id="IMG7">
+             <div class="ImageOverlay">
+                <a class="ImageItemElements" id="ImageItemElements7" href="javascript:OpenFileDialog(7);">
+                    <img style="float: right;width: 100%;height: 100%;" src="~/content/imgs/file-upload.jpg" id="img7" />
+                </a>
+                <div class="VideoItemElements" id="VideoItemElements7">
+                    <label class="vurlLabel">Video URL :</label>
+                    <input id="LIVID7" type="text" class="vurl" placeholder="Enter Video URL" />
+                </div>
+            </div>
+            <h2>
+                <input type="text" class="txtbx" placeholder="Enter the title" id="itemtitle7" name="il7" /></h2>
+            <span class="order">7</span>
+            <span>
+                <textarea class="txtbxdetails" placeholder="Enter the description" id="details7" name="dt7"></textarea></span>
+            <input type="hidden" id="Image7" value="" />
+             <div class="rds">
+                Image
+        <input type="radio" name="r7" checked onchange="ChangeImgVid('im7')" />
+                Video
+        <input type="radio" name="r7" onchange="ChangeImgVid('vd7')" />
+            </div>
+        </div>
+    </div>
+
+    <div class="itemview">
+        <div class="item" id="IMG8">
+             <div class="ImageOverlay">
+                <a class="ImageItemElements" id="ImageItemElements8" href="javascript:OpenFileDialog(8);">
+                    <img style="float: right;width: 100%;height: 100%;" src="~/content/imgs/file-upload.jpg" id="img8" />
+                </a>
+                <div class="VideoItemElements" id="VideoItemElements8">
+                    <label class="vurlLabel">Video URL :</label>
+                    <input id="LIVID8" type="text" class="vurl" placeholder="Enter Video URL" />
+                </div>
+            </div>
+            <h2>
+                <input type="text" class="txtbx" placeholder="Enter the title" id="itemtitle8" name="il8" /></h2>
+            <span class="order">8</span>
+            <span>
+                <textarea class="txtbxdetails" placeholder="Enter the description" id="details8" name="dt8"></textarea></span>
+            <input type="hidden" id="Image8" value="" />
+             <div class="rds">
+                Image
+        <input type="radio" name="r8" checked onchange="ChangeImgVid('im8')" />
+                Video
+        <input type="radio" name="r8" onchange="ChangeImgVid('vd8')" />
+            </div>
+        </div>
+    </div>
+
+    <div class="itemview">
+        <div class="item" id="IMG9">
+             <div class="ImageOverlay">
+                <a class="ImageItemElements" id="ImageItemElements9" href="javascript:OpenFileDialog(9);">
+                    <img style="float: right;width: 100%;height: 100%;" src="~/content/imgs/file-upload.jpg" id="img9" />
+                </a>
+                <div class="VideoItemElements" id="VideoItemElements9">
+                    <label class="vurlLabel">Video URL :</label>
+                    <input id="LIVID9" type="text" class="vurl" placeholder="Enter Video URL" />
+                </div>
+            </div>
+            <h2>
+                <input type="text" class="txtbx" placeholder="Enter the title" id="itemtitle9" name="il9" /></h2>
+            <span class="order">9</span>
+            <span>
+                <textarea class="txtbxdetails" placeholder="Enter the description" id="details9" name="dt9"></textarea></span>
+            <input type="hidden" id="Image9" value="" />
+             <div class="rds">
+                Image
+        <input type="radio" name="r9" checked onchange="ChangeImgVid('im9')" />
+                Video
+        <input type="radio" name="r9" onchange="ChangeImgVid('vd9')" />
+            </div>
+        </div>
+    </div>
+
+
+    <div class="itemview">
+        <div class="item" id="IMG10">
+             <div class="ImageOverlay">
+                <a class="ImageItemElements" id="ImageItemElements10" href="javascript:OpenFileDialog(10);">
+                    <img style="float: right;width: 100%;height: 100%;" src="~/content/imgs/file-upload.jpg" id="img10" />
+                </a>
+                <div class="VideoItemElements" id="VideoItemElements10">
+                    <label class="vurlLabel">Video URL :</label>
+                    <input id="LIVID10" type="text" class="vurl" placeholder="Enter Video URL" />
+                </div>
+            </div>
+            <h2>
+                <input type="text" class="txtbx" placeholder="Enter the title" id="itemtitle10" name="il10" /></h2>
+            <span class="order">10</span>
+            <span>
+                <textarea class="txtbxdetails" placeholder="Enter the description" id="details10" name="dt10"></textarea></span>
+            <input type="hidden" id="Image10" value="" />
+             <div class="rds">
+                Image
+        <input type="radio" name="r10" checked onchange="ChangeImgVid('im10')" />
+                Video
+        <input type="radio" name="r10" onchange="ChangeImgVid('vd10')" />
+            </div>
+        </div>
+    </div>
+    <div class="setbtncont">
+        <input type="submit" value="Create" class="setbtn" />
+    </div>
+    <div class="msgcont">
+        <label class="msg" id="MSG"></label>
+    </div>
+    <input type="file" id="FileImage" class="FileDialog" style="display: none;" />
+</form>

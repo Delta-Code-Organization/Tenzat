@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "ModifyModerator";
+    Layout = "~/Views/Shared/MasterPage.cshtml";
+}
+
+@using Tenzat.Models;
+
+<script src="~/Scripts/ModifyAdmin.js"></script>
+
+<div class="moderatorsContainer">
+    @{
+        foreach (Moderator m in ViewBag.Moderators)
+        {
+    <h3 class="singleModerator @m.ID">@m.Email
+        </h3>
+        <div class="moderatorBtnCont @m.ID" style="border-radius: 0px;box-shadow: 7px 2px 10px -2px grey;">
+            <img id="@m.ID" class="ModeratorToolBtn" onclick="AddModeratorPopup(@m.ID);" title="تعديل المدير" src="~/content/imgs/edit.png" />
+        </div>
+        <div class="moderatorBtnCont @m.ID" style="box-shadow: 5px 0px 10px -2px grey;">
+            <img id="@m.ID" onclick="" class="ModeratorToolBtn"  title="حذف المدير" src="~/content/imgs/cancel.png" />
+        </div>
+        }
+    }
+
+</div>
+
+ <div id="darkLayer" class="darkClass" onclick="AddModeratorPopup()">
+</div>
+
+<div id="newmoderator" class="Addmoderatorpopup" style="width: 600px; height: 400px;">
+    <h3 class="moderatorpopupHeader popupHeader" style="margin-right: -2px; float: right; background-color: #5ac3ed; border-radius: 0px 0px 0px 0px;">تعديل المدير</h3>
+    <div class="formContainer" style="margin-right: 10%;">
+        <div class="formLabelsCont" style="margin-right:5%;">
+            <label class="formLabels">الايميل</label>
+            <label class="formLabels">الباسورد</label>
+            <label class="formLabels">تأكيد الباسورد</label>
+            <label  class="formLabels" >الصلاحيات</label>
+        </div>
+        <div class="formInputsCont">
+            <form id="addModeratorForm">
+                <input id="email" name="email" type="text" class="TextBox" style="float: right;" />
+                <input id="pass" name="pass" type="password" class="TextBox" style="float: right;" />
+                <input id="confirmPass" name="confirmPass" type="password" class="TextBox" style="float: right;" />
+                @*<select id="isMod" name="isMod" class="TextBox" style="float: right; height: 37px; width: 96%;">
+                    <option value="1">???</option>
+                    <option value="0">??</option>
+                </select>*@
+                
+                <label class="formLabels"  for="ismod" style="margin-right:10px;font-size:15px;float:right;">اضافة مدير</label>
+                <input  id="ismod" type="checkbox" value="1" style="margin-top:15px;float:right;margin-right:5px;">
+                <label class="formLabels"   for="Cat" style="margin-right:10px;font-size:15px;float:right;">اضافة قائمة</label>
+                <input id="Cat" type="checkbox" style="margin-top:15px;float:right;margin-right:5px;">
+                <label class="formLabels"   for="SRC" style="margin-right:10px;font-size:15px;float:right;">اضافة قائمة ساخنة</label>
+                <input id="SRC" type="checkbox" style="margin-top:15px;float:right;margin-right:5px;">
+                <label class="formLabels"   for="Env" style="margin-right:10px;font-size:15px;float:right;">تأكيد القوائم</label>
+                <input id="Env" type="checkbox" style="margin-top:15px;float:right;margin-right:5px;">
+                    
+                <input id="AddmodSubmit" type="submit" class="addmodBtn" value="تعديل" />
+            </form>
+        </div>
+
+
+    </div>
+
+</div>

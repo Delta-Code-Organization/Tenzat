@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/MasterPage.cshtml";
+}
+<script src="~/Scripts/Login.js"></script>
+<form id="adminform">
+    
+<div class="email">
+    <label class="checks"> Email :</label>
+    <input type="email" name="AdminMail" class="textbox" id="mailbox" />
+</div>
+<div class="password">
+    <label class="checks"> Password :</label>
+    <input type="password" name="Adminpass" class="textbox" id="passbox" />
+</div>
+<div class="btncont">
+    <input type="submit" class="setbtn" value="Confirm"  />
+</div>
+     <div class="msgcont">
+         <label class="msg" id="logres"></label>
+     </div>
+    </form>

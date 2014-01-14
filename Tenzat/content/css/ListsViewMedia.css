@@ -1,0 +1,408 @@
+﻿.listmain {
+    width: 100%;
+    margin: .5%;
+    margin-top: 55px;
+    height: auto;
+    float: left;
+    background-color: #fff;
+    text-align: center;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+    .listmain img {
+        max-width: 100%;
+        height: 250px;
+        float: right;
+    }
+
+    .listmain .category {
+        font-size: 1em;
+        color: #fff;
+        width: 10%;
+        font-family: Droid;
+        vertical-align: middle;
+        background-color: #000;
+        opacity: .8;
+        position: absolute;
+        top: 30%;
+        right: 0px;
+        padding: 5px;
+    }
+
+    .listmain .title {
+        margin-top: 10%;
+        font-size: 1.5em;
+        color: #091;
+        font-family: Droid Arabic Kufi;
+        line-height: 120%;
+        float: left;
+        width: 100%;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .listmain .descr {
+        font-size: .8em;
+        color: #888;
+        font-family: Droid;
+        float: left;
+        vertical-align: middle;
+        width: 90%;
+        margin-top: 5%;
+        margin-left: 5%;
+        margin-right: 5%;
+        text-align: center;
+    }
+
+    .listmain .social {
+        position: relative;
+        left: 5px;
+        bottom: 5px;
+        float: left;
+        text-align: center;
+    }
+
+        .listmain .social img {
+            width: 20px;
+            height: 20px;
+            margin: 2px;
+            display: block;
+        }
+
+.itemview {
+    width: 100%;
+    margin-top: 10px;
+    float: left;
+    position: relative;
+    margin-left: 0px;
+}
+
+    .itemview .item {
+        width: 99.5%;
+        margin: .5%;
+        float: left;
+        height: auto;
+        background-color: #fff;
+        position: relative;
+    }
+
+        .itemview .item .order {
+            width: 35px;
+            height: 35px;
+            background-color: yellow;
+            color: #111;
+            position: absolute;
+            top: 2px;
+            right: 0px;
+            font-size: 1.7em;
+            padding: 5px;
+            text-align: center;
+            font-weight: bolder;
+            opacity: .7;
+        }
+
+        .itemview .item img {
+            float: right;
+            width: 100%;
+            height: auto;
+        }
+
+        .itemview .item h2 {
+            font-size: 1.1em;
+            color: #08e;
+            font-family: Droid;
+            margin: 2%;
+            width: 100%;
+            padding-top: 120px;
+            text-align: center;
+        }
+
+        .itemview .item span {
+            font-size: 1em;
+            color: #444;
+            margin: 1%;
+            text-align: center;
+            width: 98%;
+            float: right;
+        }
+
+        .itemview .item .see-more-btn {
+            text-decoration: none;
+            float: right;
+            color: #091;
+            margin-right: 20px;
+            width: 100%;
+            text-align: right;
+        }
+
+        .itemview .item .see-more-cont {
+            display: none;
+            width: 100%;
+            height: auto;
+            background-color: #fff;
+            margin-top: 15px;
+        }
+
+            .itemview .item .see-more-cont span {
+                font-size: 1em;
+                color: #444;
+                margin: 1%;
+                text-align: center;
+                width: 98%;
+                float: right;
+            }
+
+.related {
+    width: 99%;
+    margin-top: 55px;
+    margin-right: .5%;
+    float: right;
+    position: relative;
+    height: auto;
+}
+
+.relatedlist {
+    margin: .5%;
+    margin-left: 1%;
+    width: 31.5%;
+    height: 25vh;
+    float: left;
+    background-color: #fff;
+    text-align: center;
+    position: relative;
+    box-shadow: 5px 5px 5px #999;
+}
+
+    .relatedlist:hover {
+        opacity: .8;
+        cursor: pointer;
+    }
+
+    .relatedlist img {
+        width: 100%;
+        height: 100%;
+        float: left;
+    }
+
+    .relatedlist .category {
+        font-size: .7em;
+        color: #fff;
+        font-family: Droid;
+        vertical-align: middle;
+        background-color: #000;
+        opacity: .5;
+        position: absolute;
+        top: 5%;
+        left: 0px;
+        padding: 5px;
+        min-width: 20%;
+    }
+
+    .relatedlist .title {
+        font-size: .7em;
+        color: #fff;
+        width: 80%;
+        font-family: Droid;
+        vertical-align: middle;
+        background-color: #000;
+        opacity: .6;
+        position: absolute;
+        bottom: 10%;
+        right: 0px;
+        padding: 5px;
+        min-height: 15%;
+    }
+
+    .relatedlist:hover .title {
+        font-size: .5em;
+        color: #fff;
+        width: 85%;
+        font-family: Droid;
+        vertical-align: middle;
+        background-color: #000;
+        opacity: 1;
+        position: absolute;
+        bottom: 10%;
+        right: 0px;
+        padding: 5px;
+    }
+
+.leftpanel {
+    width: 40%;
+    margin: .5%;
+    margin-top: 55px;
+    height: auto;
+    float: left;
+    background-color: #fff;
+    text-align: center;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+    .leftpanel img {
+        width: 100%;
+        height: 50%;
+        float: left;
+    }
+
+    .leftpanel .category {
+        font-size: 1.5em;
+        color: #fff;
+        font-family: Droid;
+        vertical-align: middle;
+        background-color: #000;
+        opacity: .8;
+        position: absolute;
+        top: 5%;
+        right: 0px;
+        padding: 5px;
+    }
+
+    .leftpanel .title {
+        margin-top: 10%;
+        font-size: 1.7em;
+        color: #091;
+        font-family: Droid Arabic Kufi;
+        line-height: 120%;
+        float: left;
+        vertical-align: middle;
+    }
+
+    .leftpanel .descr {
+        font-size: 1.2em;
+        color: #888;
+        font-family: Droid;
+        float: left;
+        vertical-align: middle;
+        width: 90%;
+        margin-top: 5%;
+        margin-left: 5%;
+        margin-right: 5%;
+        text-align: center;
+    }
+
+    .leftpanel .social {
+        float: left;
+        width: 100%;
+        margin-left: 0%;
+        margin-top: 10px;
+        text-align: center;
+    }
+
+        .leftpanel .social img {
+            width: 40px;
+            height: 40px;
+            margin: 2px;
+            display: block;
+        }
+
+.listspanel {
+    width: 59%;
+    margin-top: 50px;
+    height: 100vh;
+    float: left;
+}
+
+.toppanel .logo {
+    font-size: 2em;
+    color: #fff;
+    font-family: Sigmar One;
+    vertical-align: middle;
+    float: left;
+}
+
+.toppanel .social {
+    font-size: 2em;
+    color: #0d2;
+    float: left;
+    padding: .5%;
+}
+
+    .toppanel .social img {
+        width: 35px;
+        height: 35px;
+        vertical-align: middle;
+        float: left;
+        margin: 5px;
+    }
+
+.toppanel .sort {
+    float: right;
+    vertical-align: middle;
+    width: 30%;
+    margin-right: 1%;
+}
+
+    .toppanel .sort img {
+        width: 35px;
+        height: 35px;
+        vertical-align: middle;
+        float: right;
+        margin: 5px;
+    }
+
+.list {
+    margin: .5%;
+    width: 48.5%;
+    height: 45vh;
+    float: left;
+    background-color: #fff;
+    text-align: center;
+    position: relative;
+    box-shadow: 5px 5px 5px #999;
+}
+
+    .list:hover {
+        opacity: .8;
+        cursor: pointer;
+    }
+
+    .list img {
+        width: 100%;
+        height: 100%;
+        float: left;
+    }
+
+    .list .category {
+        font-size: 1.2em;
+        color: #fff;
+        font-family: Droid;
+        vertical-align: middle;
+        background-color: #000;
+        opacity: .5;
+        position: absolute;
+        top: 5%;
+        left: 0px;
+        padding: 5px;
+        min-width: 20%;
+    }
+
+    .list .title {
+        font-size: 1.2em;
+        color: #fff;
+        width: 90%;
+        font-family: Droid;
+        vertical-align: middle;
+        background-color: #000;
+        opacity: .6;
+        position: absolute;
+        bottom: 10%;
+        right: 0px;
+        padding: 5px;
+        min-height: 15%;
+    }
+
+    .list:hover .title {
+        font-size: 1.2em;
+        color: #fff;
+        width: 90%;
+        font-family: Droid;
+        vertical-align: middle;
+        background-color: #000;
+        opacity: 1;
+        position: absolute;
+        bottom: 10%;
+        right: 0px;
+        padding: 5px;
+    }

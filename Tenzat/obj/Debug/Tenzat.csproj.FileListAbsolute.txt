@@ -1,0 +1,82 @@
+D:\Tenzat\Tenzat\bin\Tenzat.dll
+D:\Tenzat\Tenzat\bin\Tenzat.pdb
+D:\Tenzat\Tenzat\bin\Microsoft.Web.Infrastructure.dll
+D:\Tenzat\Tenzat\bin\Newtonsoft.Json.dll
+D:\Tenzat\Tenzat\bin\System.Net.Http.Formatting.dll
+D:\Tenzat\Tenzat\bin\System.Web.Helpers.dll
+D:\Tenzat\Tenzat\bin\System.Web.Http.dll
+D:\Tenzat\Tenzat\bin\System.Web.Http.WebHost.dll
+D:\Tenzat\Tenzat\bin\System.Web.Mvc.dll
+D:\Tenzat\Tenzat\bin\System.Web.Razor.dll
+D:\Tenzat\Tenzat\bin\System.Web.WebPages.Deployment.dll
+D:\Tenzat\Tenzat\bin\System.Web.WebPages.dll
+D:\Tenzat\Tenzat\bin\System.Web.WebPages.Razor.dll
+D:\Tenzat\Tenzat\bin\Newtonsoft.Json.xml
+D:\Tenzat\Tenzat\bin\System.Net.Http.Formatting.xml
+D:\Tenzat\Tenzat\bin\System.Web.Helpers.xml
+D:\Tenzat\Tenzat\bin\System.Web.Http.xml
+D:\Tenzat\Tenzat\bin\System.Web.Http.WebHost.xml
+D:\Tenzat\Tenzat\bin\System.Web.Mvc.xml
+D:\Tenzat\Tenzat\bin\System.Web.Razor.xml
+D:\Tenzat\Tenzat\bin\System.Web.WebPages.xml
+D:\Tenzat\Tenzat\bin\System.Web.WebPages.Deployment.xml
+D:\Tenzat\Tenzat\bin\System.Web.WebPages.Razor.xml
+D:\Tenzat\Tenzat\obj\Debug\Tenzat.csprojResolveAssemblyReference.cache
+D:\Tenzat\Tenzat\obj\Debug\Tenzat.dll
+D:\Tenzat\Tenzat\obj\Debug\Tenzat.pdb
+C:\Users\Top system\Desktop\Tenzat\Code\Tenzat\bin\Tenzat.dll
+C:\Users\Top system\Desktop\Tenzat\Code\Tenzat\bin\Tenzat.pdb
+C:\Users\Top system\Desktop\Tenzat\Code\Tenzat\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Top system\Desktop\Tenzat\Code\Tenzat\bin\Newtonsoft.Json.dll
+C:\Users\Top system\Desktop\Tenzat\Code\Tenzat\bin\System.Net.Http.Formatting.dll
+C:\Users\Top system\Desktop\Tenzat\Code\Tenzat\bin\System.Web.Helpers.dll
+C:\Users\Top system\Desktop\Tenzat\Code\Tenzat\bin\System.Web.Http.dll
+C:\Users\Top system\Desktop\Tenzat\Code\Tenzat\bin\System.Web.Http.WebHost.dll
+C:\Users\Top system\Desktop\Tenzat\Code\Tenzat\bin\System.Web.Mvc.dll
+C:\Users\Top system\Desktop\Tenzat\Code\Tenzat\bin\System.Web.Razor.dll
+C:\Users\Top system\Desktop\Tenzat\Code\Tenzat\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Top system\Desktop\Tenzat\Code\Tenzat\bin\System.Web.WebPages.dll
+C:\Users\Top system\Desktop\Tenzat\Code\Tenzat\bin\System.Web.WebPages.Razor.dll
+C:\Users\Top system\Desktop\Tenzat\Code\Tenzat\bin\Newtonsoft.Json.xml
+C:\Users\Top system\Desktop\Tenzat\Code\Tenzat\bin\System.Net.Http.Formatting.xml
+C:\Users\Top system\Desktop\Tenzat\Code\Tenzat\bin\System.Web.Helpers.xml
+C:\Users\Top system\Desktop\Tenzat\Code\Tenzat\bin\System.Web.Http.xml
+C:\Users\Top system\Desktop\Tenzat\Code\Tenzat\bin\System.Web.Http.WebHost.xml
+C:\Users\Top system\Desktop\Tenzat\Code\Tenzat\bin\System.Web.Mvc.xml
+C:\Users\Top system\Desktop\Tenzat\Code\Tenzat\bin\System.Web.Razor.xml
+C:\Users\Top system\Desktop\Tenzat\Code\Tenzat\bin\System.Web.WebPages.xml
+C:\Users\Top system\Desktop\Tenzat\Code\Tenzat\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Top system\Desktop\Tenzat\Code\Tenzat\bin\System.Web.WebPages.Razor.xml
+C:\Users\Top system\Desktop\Tenzat\Code\Tenzat\obj\Debug\Tenzat.csprojResolveAssemblyReference.cache
+C:\Users\Top system\Desktop\Tenzat\Code\Tenzat\obj\Debug\Tenzat.dll
+C:\Users\Top system\Desktop\Tenzat\Code\Tenzat\obj\Debug\Tenzat.pdb
+C:\Users\Top system\Desktop\Tenzat\Code\Tenzat\bin\EntityFramework.dll
+C:\Users\Top system\Desktop\Tenzat\Code\Tenzat\bin\EntityFramework.xml
+C:\Users\Top system\Desktop\Code\Tenzat\bin\Tenzat.dll
+C:\Users\Top system\Desktop\Code\Tenzat\bin\Tenzat.pdb
+C:\Users\Top system\Desktop\Code\Tenzat\bin\EntityFramework.dll
+C:\Users\Top system\Desktop\Code\Tenzat\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Top system\Desktop\Code\Tenzat\bin\Newtonsoft.Json.dll
+C:\Users\Top system\Desktop\Code\Tenzat\bin\System.Net.Http.Formatting.dll
+C:\Users\Top system\Desktop\Code\Tenzat\bin\System.Web.Helpers.dll
+C:\Users\Top system\Desktop\Code\Tenzat\bin\System.Web.Http.dll
+C:\Users\Top system\Desktop\Code\Tenzat\bin\System.Web.Http.WebHost.dll
+C:\Users\Top system\Desktop\Code\Tenzat\bin\System.Web.Mvc.dll
+C:\Users\Top system\Desktop\Code\Tenzat\bin\System.Web.Razor.dll
+C:\Users\Top system\Desktop\Code\Tenzat\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Top system\Desktop\Code\Tenzat\bin\System.Web.WebPages.dll
+C:\Users\Top system\Desktop\Code\Tenzat\bin\System.Web.WebPages.Razor.dll
+C:\Users\Top system\Desktop\Code\Tenzat\bin\EntityFramework.xml
+C:\Users\Top system\Desktop\Code\Tenzat\bin\Newtonsoft.Json.xml
+C:\Users\Top system\Desktop\Code\Tenzat\bin\System.Net.Http.Formatting.xml
+C:\Users\Top system\Desktop\Code\Tenzat\bin\System.Web.Helpers.xml
+C:\Users\Top system\Desktop\Code\Tenzat\bin\System.Web.Http.xml
+C:\Users\Top system\Desktop\Code\Tenzat\bin\System.Web.Http.WebHost.xml
+C:\Users\Top system\Desktop\Code\Tenzat\bin\System.Web.Mvc.xml
+C:\Users\Top system\Desktop\Code\Tenzat\bin\System.Web.Razor.xml
+C:\Users\Top system\Desktop\Code\Tenzat\bin\System.Web.WebPages.xml
+C:\Users\Top system\Desktop\Code\Tenzat\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Top system\Desktop\Code\Tenzat\bin\System.Web.WebPages.Razor.xml
+C:\Users\Top system\Desktop\Code\Tenzat\obj\Debug\Tenzat.dll
+C:\Users\Top system\Desktop\Code\Tenzat\obj\Debug\Tenzat.pdb
+C:\Users\Top system\Desktop\Code\Tenzat\obj\Debug\Tenzat.csprojResolveAssemblyReference.cache

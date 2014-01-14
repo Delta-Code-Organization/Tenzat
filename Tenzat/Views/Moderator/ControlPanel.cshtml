@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "ControlPanel";
+    Layout = "~/Views/Shared/MasterPage.cshtml";
+}
+<script src="~/Scripts/ControlPanel.js"></script>
+<div class="panelcontainer">
+    <h1 class="address">Moderator Controls ....</h1>
+    
+        <div class="firstbox" id="1" onmouseover="myfunction(this.id);" onclick="ModeratorManager()" onmouseout="myfunction2(this.id)">
+            <a class="words" href="#">Moderators Managment</a>
+            <img class="panelimage" src="/Content/imgs/settings.png" >
+        </div>
+        
+        
+        <div class="secondbox" id="2" onmouseover="myfunction(this.id);" onmouseout="myfunction2(this.id)" onclick="creatlist()">
+            <a class="words" href="#">Create List</a>
+            <img class="panelimage" src="/Content/imgs/settings.png">
+        </div>
+        
+        
+        @*<div class="thirdbox" id="3" onmouseover="myfunction(this.id);" onmouseout="myfunction2(this.id)" onclick="">
+            <a class="words" href="#">إضافة عنصر للقائمه</a>
+            <img class="panelimage" src="/Content/imgs/settings.png">
+        </div>*@
+    <div class="fifthbox" id="5" onmouseover="myfunction(this.id);" onclick="Serchlist()" onmouseout="myfunction2(this.id)" >
+        <a class="words" href="#">Confirm/Remove List</a>
+        <img class="panelimage" src="/Content/imgs/settings.png">
+    </div>
+
+    <div class="Sixthbox" id="6" onmouseover="myfunction(this.id);" onclick="Hotlist()" onmouseout="myfunction2(this.id)">
+        <a class="words" href="#">Set Hot List</a>
+        <img class="panelimage" src="/Content/imgs/settings.png">
+    </div>
+</div>
+

@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "CreateAdmin";
+    Layout = "~/Views/Shared/MasterPage.cshtml";
+}
+<script src="~/Scripts/CreateAdmin.js"></script>
+<form id="admcreateform">
+<div class="email">
+    <label class="checks"> Email :</label>
+    <input type="email" name="NewAdminMail" class="textbox" id="mailtxtbox" />
+</div>
+<div class="password">
+    <label class="checks"> Password :</label>
+    <input type="password" name="NewAdminpass" class="textbox" id="passtxtbox" />
+</div>
+    
+<div class="modorpriv">
+    <input type="checkbox" class="checksbox" id="chbox" />
+      <label class="checks">  Create Admin </label>
+</div>
+<div class="modorpriv">  
+    <input type="checkbox" class="checksbox" id="chbox1" />
+        <label class="checks">Create List</label>
+</div>
+<div class="modorpriv">
+    <input type="checkbox" class="checksbox" id="chbox2" />
+       <label class="checks">Set Hot List</label> 
+</div>
+<div class="modorpriv">
+    <input type="checkbox" class="checksbox" id="chbox3"/>
+       <label class="checks">Confirm/Remove List</label> 
+</div>
+<div class="btncont">
+    <input type="submit" class="setbtn" value="Confirm" />
+</div>
+    <div class="msgcont">
+        <label class="msg" id="MSG"></label>
+    </div>
+</form>
