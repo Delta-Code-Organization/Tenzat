@@ -18,10 +18,14 @@ function creatlist() {
     window.location.href = "/Moderator/CreateList";
 }
 
-function Hotlist() {
-    window.location.href = "/Moderator/SetHotList";
+function Modify() {
+    window.location.href = "/Moderator/ModifyAdmin";
 }
 
 function Serchlist() {
     window.location.href = "/Moderator/SearchList";
+}
+
+function Logout() {
+    window.location.href = "/Moderator/LogOut";
 }

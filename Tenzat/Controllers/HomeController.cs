@@ -134,10 +134,5 @@ namespace Tenzat.Controllers
             var res = moder.CreateModerator();
             return res;
         }
-        public Returner SetHot()
-        {
-            List l = new List();
-            return (l.SetHotList(4));
-        }
     }
 }

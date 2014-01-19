@@ -10,14 +10,14 @@
         </div>
         <div class="srchcont">
           <label class="searchby">Search by Title :</label>  
-    <input type="text" class="tbox" id="tboxx"/>
+    <input type="text" class="tbox" id="tbx"/>
         </div>
     <div class="srchcont">
         <label class="searchby">Search by Tag :</label> 
-     <select class="droplist1" id="droptag">
+     <select class="droplist1" id="drop">
        @{
                 int Val = 0;
-                foreach (string Tag in ViewBag.Tags)
+                foreach (string Tag in ViewBag.AllTags)
                 {
      <option value="3000"></option>
       <option value="@Val"> @Tag</option>
@@ -27,7 +27,7 @@
  </select>
     </div>
     <div class="srchbtncont">
-        <input type="submit" value="Search" class="srchbtn" onclick="MakeHot()" />
+        <input type="button" value="Search" class="srchbtn" onclick="MakeHot()" />
     </div>
 </div>
 <div class="searchalllists">

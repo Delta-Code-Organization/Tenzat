@@ -6,17 +6,21 @@ JQUERY4U.UTIL =
         $("#adminform").validate({
             rules: {
                 AdminMail: {
+                    email:true,
                     required: true        
                 },
                 Adminpass: {
+                    minlength:5,
                     required: true     
                 }
             },
             messages: {
                 AdminMail: {
+                    email:"Please enter a valid Email address",
                     required: "Please enter your Email "
                 },
                 Adminpass: {
+                    minlength:"Your password must be at least 5 characters",
                     required: "Please enter your password "
                 },
             },
@@ -31,6 +35,7 @@ JQUERY4U.UTIL =
                         data: admindata,
                         success: function (data) {
                             $('#logres').text(data);
+                            window.location.href = '/Moderator/ControlPanel';
                         },
                         error:function(data){
                             alert(data.responseText);

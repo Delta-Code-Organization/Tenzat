@@ -21,10 +21,9 @@
         </div>
         }
     }
+    </div>
 
-</div>
-
- <div id="darkLayer" class="darkClass" onclick="AddModeratorPopup()">
+ <div id="darkLayer" class="darkClass" onclick="ClosePopup()">
 </div>
 
 <div id="newmoderator" class="Addmoderatorpopup" style="width: 600px; height: 400px;">
@@ -38,7 +37,7 @@
         </div>
         <div class="formInputsCont">
             <form id="addModeratorForm">
-                <input id="email" name="email" type="text" class="TextBox" style="float: right;" />
+                <input id="email" name="email" type="email" class="TextBox" style="float: right;" />
                 <input id="pass" name="pass" type="password" class="TextBox" style="float: right;" />
                 <input id="confirmPass" name="confirmPass" type="password" class="TextBox" style="float: right;" />
                 @*<select id="isMod" name="isMod" class="TextBox" style="float: right; height: 37px; width: 96%;">
@@ -56,10 +55,14 @@
                 <input id="Env" type="checkbox" style="margin-top:15px;float:right;margin-right:5px;">
                     
                 <input id="AddmodSubmit" type="button" onclick="EditAdmin()" class="addmodBtn" value="تعديل" />
+                      
             </form>
         </div>
-
+        <div class="msgcontt">
+        <label class="msg" id="MSG1"></label>
+    </div>
 
     </div>
 
 </div>
+

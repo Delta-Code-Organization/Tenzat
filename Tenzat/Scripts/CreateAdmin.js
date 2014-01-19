@@ -35,6 +35,9 @@
                                    data: admindata,
                                    success: function (data) {
                                        $("#MSG").text(data);
+                                       setInterval(function () {
+                                           location.reload();
+                                       }, 3000);
                                    },
                                    error: function (data) {
                                        alert(data.responseText);

@@ -78,5 +78,27 @@ namespace Tenzat.Models
                 Message = Msgs.Admin_Updated_Successfully
             };
         }
+
+        public Returner GetByID()
+        {
+            var Admin = db.Moderators.Where(p => p.ID == this.ID).ToList();
+            var JSONAdmin = (from A in Admin
+                             select new
+                             {
+                                 A.ApproveLists,
+                                 A.CreateAdmin,
+                                 A.CreateList,
+                                 A.Email,
+                                 A.ID,
+                                 A.password,
+                                 A.SetHotLists,
+                                 A.Status
+                             }).Cast<object>().ToList().SingleOrDefault();
+            return new Returner 
+            { 
+                Data = Admin.SingleOrDefault(),
+                DataInJSON = JSONAdmin.ToJSON()
+            };
+        }
     }
 }

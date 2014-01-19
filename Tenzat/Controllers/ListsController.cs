@@ -19,19 +19,5 @@ namespace Tenzat.Controllers
             return View();
         }
 
-        public Returner Confirm()
-        {
-            List l = new List();
-            var res = l.ConfirmList(5);
-            return res;
-        }
-
-        public Returner Remove()
-        {
-            List l = new List();
-            var res = l.RemoveList(4);
-            return res;
-        }
-
     }
 }

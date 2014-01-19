@@ -1,4 +1,124 @@
-﻿(function ($, W, D) {
+﻿var First = true;
+var ChangedID;
+
+function OpenFileDialog(id) {
+    $(".FileDialog").click();
+    ChangedID = id;
+}
+
+function Show() {
+    if (First == true) {
+        $('#Vid').show();
+        $('#ListImg').hide();
+        $('.VideoItemElements').show();
+        $('.ImageItemElements').hide();
+        $('.rds').hide();
+        First = false;
+    }
+    else {
+        $('#Vid').hide();
+        $('#ListImg').show();
+        $('.VideoItemElements').hide();
+        $('.ImageItemElements').show();
+        $('.rds').show();
+        First = true;
+    }
+}
+
+
+$(document).ready(function () {
+    document.getElementById("RImg").checked = true
+    var ImageInBase64;
+
+    $("#ListImg").change(function (e) {
+        readImagesFromUploader(e);
+        var interval = setInterval(function () {
+            if (ImageInBase64 != undefined && ImageInBase64 != null) {
+                $('#ImageList').val(ImageInBase64);
+                clearInterval(interval);
+            }
+        }, 1000);
+    });
+
+    $("#FileImage").change(function (e) {
+        readImagesFromUploader(e);
+        var interval = setInterval(function () {
+            if (ImageInBase64 != undefined && ImageInBase64 != null) {
+                $('#Image' + ChangedID).val(ImageInBase64);
+                clearInterval(interval);
+                UploadImage(ChangedID);
+            }
+        }, 1000);
+    });
+
+    function UploadImage(id) {
+        var orderid = id;
+        var imageinbase = $('#Image' + id).val();
+        var data = { 'orderid': orderid, 'ImageBase64': imageinbase };
+        $.ajax({
+            url: '/Moderator/UploadImage',
+            type: 'post',
+            data: data,
+            success: function (data) {
+                $('#img' + id).attr('src', data);
+            },
+            error: function (data) {
+                alert(data.responseText);
+            }
+        });
+    }
+
+    function readImage(file, event) {
+        ImageInBase64 = event.target.result.replace("data:image/png;base64,", "");
+        ImageInBase64 = ImageInBase64.replace("data:image/jpeg;base64,", "");
+        ImageInBase64 = ImageInBase64.replace("data:image/jpg;base64,", "");
+        ImageInBase64 = ImageInBase64.replace("data:image/gif;base64,", "");
+    }
+
+    function readImages(event) {
+        var files = event.originalEvent.dataTransfer.files;
+        $.each(files, function (index, file) {
+            var fileReader = new FileReader();
+            fileReader.onload = (function (file) {
+                return function (event) {
+                    return readImage(file, event);
+                }
+            })(file);
+            fileReader.readAsDataURL(file);
+        });
+    }
+
+    function readImagesFromUploader(event) {
+        var files = event.target.files;
+        $.each(files, function (index, file) {
+            var fileReader = new FileReader();
+            fileReader.onload = (function (file) {
+                return function (event) {
+                    return readImage(file, event);
+                }
+            })(file);
+            fileReader.readAsDataURL(file);
+        });
+    }
+
+});
+
+function ChangeImgVid(id) {
+    var counter = id.substr(2, 1);
+    if (id.indexOf('10') != -1) {
+        counter = 10;
+    }
+    if (id.indexOf('vd') != -1) {
+        $('#VideoItemElements' + counter).show();
+        $('#ImageItemElements' + counter).hide();
+    }
+    else {
+        $('#VideoItemElements' + counter).hide();
+        $('#ImageItemElements' + counter).show();
+    }
+}
+
+(function ($, W, D) {
     var JQUERY4U = {};
     JQUERY4U.UTIL =
     {
@@ -230,6 +350,11 @@
                             traditional: true,
                             success: function (data) {
                                 $("#MSG").text(data);
+                                var height = $(document).height();
+                                window.scroll(0, height);
+                                setInterval(function () {
+                                    window.location.href = '/Moderator/CreateList';
+                                }, 3000);
                             },
                             error: function (data) {
                                 alert(data.responseText);

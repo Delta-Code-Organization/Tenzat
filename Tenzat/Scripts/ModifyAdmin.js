@@ -1,13 +1,13 @@
 ﻿$(document).ready(function () {
     $('#AddMod').click(function () {
-
         AddModeratorPopup();
     });
 });
 
 var AdminID;
 
-function AddModeratorPopup(id) {
+function ClosePopup()
+{
     var height = $(document).height();
     var poph = $('#newmoderator').height();
     var margin = (height - poph) / 4;
@@ -15,8 +15,35 @@ function AddModeratorPopup(id) {
     $('#newmoderator').slideToggle(0);
     $('#darkLayer').slideToggle(0);
     $('#darkLayer').css({ "height": height });
-    AdminID = id;
+}
 
+function AddModeratorPopup(id) {
+    AdminID = id;
+    var data = { '_ID': AdminID };
+    $.ajax({
+        url: '/Moderator/GetModeratorData',
+        type: 'Post',
+        data: data,
+        success: function (data) {
+            $('#email').val(data.Email);
+            $('#pass').val(data.password);
+            $('#confirmPass').val(data.password);
+            $('#ismod').attr('checked', data.CreateAdmin);
+            $('#Cat').attr('checked', data.CreateList);
+            $('#SRC').attr('checked', data.SethotList);
+            $('#Env').attr('checked', data.ApproveList);
+        },
+        error: function (data) {
+            alert(data.responseText);
+        }
+    });
+    var height = $(document).height();
+    var poph = $('#newmoderator').height();
+    var margin = (height - poph) / 4;
+    $('#newmoderator').css({ "margin-top": margin });
+    $('#newmoderator').slideToggle(0);
+    $('#darkLayer').slideToggle(0);
+    $('#darkLayer').css({ "height": height });
 }
 
 function DeleteModerator(id)
@@ -28,12 +55,18 @@ function DeleteModerator(id)
         success: function (data) {
             $('.' + id).fadeOut(500);
         },
-        error: function (data) {alert(data.responseText) }
+        error: function (data) {
+            alert(data.responseText)
+        }
     });
 }
 
 function EditAdmin()
 {
+    if ($('#pass').val() != $('#confirmPass').val()) {
+        alert("Your Password does't match");
+        return;
+    }
     var Email = $('#email').val();
     var Password = $('#pass').val();
     var createMod = $('#ismod').is(":checked");
@@ -46,9 +79,11 @@ function EditAdmin()
         type: 'Post',
         data: data,
         success: function (data) {
-            
+            $('#MSG1').text(data);
         },
-        error: function (data) { alert(data.responseText) }
+        error: function (data) {
+            alert(data.responseText)
+        }
     });
 }
 

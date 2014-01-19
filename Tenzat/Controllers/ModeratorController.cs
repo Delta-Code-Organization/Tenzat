@@ -44,13 +44,34 @@ namespace Tenzat.Controllers
             return msgres;
         }
 
+        public ActionResult LogOut()
+        {
+            Session.Clear();
+            return RedirectToAction("Login", "Moderator");
+        }
+
         public ActionResult ControlPanel()
         {
+            if (Session["moderator"] == null)
+            {
+                return RedirectToAction("Login", "Moderator");
+            }
+            ViewBag.Mod = Session["moderator"] as Moderator;
             return View();
         }
 
         public ActionResult ModifyAdmin()
         {
+            if (Session["moderator"] == null)
+            {
+                return RedirectToAction("Login", "Moderator");
+            }
+            Moderator MM = new Moderator();
+            MM = Session["moderator"] as Moderator;
+            if (MM.CreateAdmin != true)
+            {
+                return RedirectToAction("ControlPanel", "Moderator");
+            }
             Moderator M = new Moderator();
             List<Moderator> LOM = new List<Moderator>();
             LOM = M.allmod();
@@ -60,6 +81,16 @@ namespace Tenzat.Controllers
 
         public ActionResult CreateList()
         {
+            if (Session["moderator"] == null)
+            {
+                return RedirectToAction("Login", "Moderator");
+            }
+            Moderator MM = new Moderator();
+            MM = Session["moderator"] as Moderator;
+            if (MM.CreateList != true)
+            {
+                return RedirectToAction("ControlPanel", "Moderator");
+            }
             string[] Tags = Enum.GetNames(typeof(Tags));
             ViewBag.Tags = Tags;
             return View();
@@ -156,7 +187,16 @@ namespace Tenzat.Controllers
 
         public ActionResult CreateAdmin()
         {
-
+            if (Session["moderator"] == null)
+            {
+                return RedirectToAction("Login", "Moderator");
+            }
+            Moderator MM = new Moderator();
+            MM = Session["moderator"] as Moderator;
+            if (MM.CreateAdmin != true)
+            {
+                return RedirectToAction("ControlPanel", "Moderator");
+            }
             return View();
         }
 
@@ -174,13 +214,18 @@ namespace Tenzat.Controllers
             return res;
         }
 
-
-        public ActionResult SetHotList()
-        {
-            return View();
-        }
         public ActionResult SearchList()
         {
+            if (Session["moderator"] == null)
+            {
+                return RedirectToAction("Login", "Moderator");
+            }
+            Moderator MM = new Moderator();
+            MM = Session["moderator"] as Moderator;
+            if (MM.SetHotLists != true && MM.ApproveLists != true)
+            {
+                return RedirectToAction("ControlPanel", "Moderator");
+            }
             string[] Tags = Enum.GetNames(typeof(Tags));
             ViewBag.Tags = Tags;
             return View();
@@ -266,6 +311,40 @@ namespace Tenzat.Controllers
             M.SetHotLists = SethotList ;
             M.password = Password;
             return M.EditAdmin().Message.ShowMsg();
+        }
+
+        [HttpPost]
+        public JsonResult GetModeratorData(int _ID)
+        {
+            Moderator M = new Moderator();
+            M.ID = _ID;
+            return M.GetByID().DataInJSON;
+        }
+
+
+        public string Confirm(int _id)
+        {
+            List l = new List();
+            var res = l.ConfirmList(_id);
+            return res.Message.ShowMsg();
+        }
+
+        public string Remove(int _id)
+        {
+            List l = new List();
+            return l.RemoveList(_id).Message.ShowMsg();
+        }
+        public string SetHot(int _id)
+        {
+            List l = new List();
+            return l.SetHotList(_id).Message.ShowMsg();
+        }
+
+        public JsonResult GetPermission()
+        { 
+            Moderator M = new Moderator();
+            M = Session["moderator"] as Moderator;
+            return GetModeratorData(M.ID);
         }
     }
 }
