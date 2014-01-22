@@ -27,7 +27,7 @@ function Show() {
 
 
 $(document).ready(function () {
-    document.getElementById("RImg").checked = true
+   // document.getElementById("RImg").checked = true
     var ImageInBase64;
 
     $("#ListImg").change(function (e) {
@@ -37,8 +37,8 @@ $(document).ready(function () {
                 $('#ImageList').val(ImageInBase64);
                 clearInterval(interval);
             }
-        }, 1000);
-    });
+    });        }, 1000);
+
 
     $("#FileImage").change(function (e) {
         readImagesFromUploader(e);
@@ -308,14 +308,14 @@ function ChangeImgVid(id) {
                         var listType;
                         var VideoObject = "";
                         var ListOfVideos = "";
-                        if ($('#RImg').is(':checked')) {
-                            Image = $('#ImageList').val();
-                            listType = 'Img';
-                        }
-                        if ($('#RVid').is(':checked')) {
-                            VideoLink = $('#Vid').val();
-                            listType = 'Vid';
-                        }
+                        //if ($('#RImg').is(':checked')) {
+                        Image = $('#ImageList').val();
+                        //    listType = 'Img';
+                        //}
+                        //if ($('#RVid').is(':checked')) {
+                        //    VideoLink = $('#Vid').val();
+                        //    listType = 'Vid';
+                        //}
                         var Tag = $('#droptag').val();
                         var ListItems = new Array();
                         for (var i = 1; i <= 10; i++) {
@@ -342,7 +342,7 @@ function ChangeImgVid(id) {
                                 ListOfVideos = VideoObject.substr(0, VideoLength - 1);
                             }
                         }
-                        var data = { 'ListTitle': ListTitle, 'listtype': listType, 'ImageURL': ImageUrl, 'VideoURL': videoUrl, 'Tag': Tag, 'ListItems': ListItems, 'VideosUrls': '[' + ListOfVideos + ']' };
+                        var data = { 'ListTitle': ListTitle, 'listtype': 'Img', 'ImageURL': ImageUrl, 'VideoUrl': videoUrl, 'Tag': Tag, 'ListItems': ListItems, 'VideosUrls': '[' + ListOfVideos + ']' };
                         $.ajax({
                             url: '/Moderator/AddList',
                             type: 'post',

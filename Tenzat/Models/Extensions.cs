@@ -21,5 +21,6 @@ namespace Tenzat.Models
             };
             return JR;
         }
+      
     }
 }

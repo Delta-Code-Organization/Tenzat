@@ -63,14 +63,14 @@ namespace Tenzat.Models
 
         public Returner GetListByRank()
         {
-            var getListByRank = db.Lists.OrderByDescending(p => p.Rank).ToList();
+            var getListByRank = db.Lists.OrderByDescending(p => p.Rank).ToList().Take(6);
             var CustomList = (from L in getListByRank
                               select new
                               {
                                   L.CreatedBy,
                                   L.Rank,
                                   L.Status,
-                                  L.Tag,
+                                  Tag = Enum.GetName(typeof(Tags), L.Tag),
                                   L.Title,
                                   L.image,
                                   L.Views,
@@ -106,6 +106,55 @@ namespace Tenzat.Models
                 Data = getListByRank,
                 DataInJSON = CustomList.ToJSON()
                 
+            };
+        }
+
+        public Returner GetListByRankAjax(List<int> IDS)
+        {
+            var getListByRank = db.Lists.OrderByDescending(p => p.Rank).Where(p => !IDS.Contains(p.ID)).Take(6).ToList();
+            var CustomList = (from L in getListByRank
+                              select new
+                              {
+                                  L.CreatedBy,
+                                  L.Rank,
+                                  L.Status,
+                                  Tag = Enum.GetName(typeof(Tags), L.Tag),
+                                  L.Title,
+                                  L.image,
+                                  L.Views,
+                                  L.FbShares,
+                                  L.TwitterShares,
+                                  L.Hot,
+                                  L.ListType,
+                                  ListDate,
+                                  L.ID,
+                                  Moderator = new
+                                  {
+                                      L.Moderator.CreateAdmin,
+                                      L.Moderator.CreateList,
+                                      L.Moderator.Email,
+                                      L.Moderator.ID,
+                                      L.Moderator.SetHotLists,
+                                      L.Moderator.Status
+                                  },
+                                  ListItems = new List<object>((from LI in L.ListItems
+                                                                select new
+                                                                {
+                                                                    LI.Order,
+                                                                    LI.ItemType,
+                                                                    LI.ID,
+                                                                    LI.ListID,
+                                                                    LI.MoreText,
+                                                                    LI.Title,
+                                                                    LI.Description,
+                                                                    LI.Drawable
+                                                                }).Cast<object>().ToList()).Cast<object>().ToList()
+                              }).ToList();
+            return new Returner
+            {
+                Data = getListByRank,
+                DataInJSON = CustomList.ToJSON()
+
             };
         }
 
@@ -195,14 +244,14 @@ namespace Tenzat.Models
 
         public Returner GetListByID(int _ID)
         {
-            var myList = db.Lists.Where(p => p.ID == _ID).ToList();
+            var myList = db.Lists.Where(p => p.ID ==_ID).ToList();
             var myCustomList = (from cl in myList
                               select new
                             {
                                 cl.CreatedBy,
                                 cl.Rank,
                                 cl.Status,
-                                cl.Tag,
+                                Tag = Enum.GetName(typeof(Tags), cl.Tag),
                                 cl.Title,
                                 cl.image,
                                 cl.Views,
@@ -236,7 +285,7 @@ namespace Tenzat.Models
                             }).ToList().FirstOrDefault();
             return new Returner
             {
-                Data = myList.SingleOrDefault(),
+                Data = myList.FirstOrDefault(),
                 DataInJSON = myCustomList.ToJSON()
             }; 
         }
@@ -285,28 +334,28 @@ namespace Tenzat.Models
                        select t).ToList();
             var tagList=(from tl in tag
                         select new {
-                             tl.CreatedBy,
-                                tl.Rank,
-                                tl.Status,
-                                tl.Tag,
-                                tl.Title,
-                                tl.image,
-                                tl.Views,
-                                tl.FbShares,
-                                tl.TwitterShares,
-                                tl.Hot,
-                                tl.ListType,
-                                tl.ListDate,
-                                tl.ID,
-                                Moderator = new
-                                {
-                                    tl.Moderator.CreateAdmin,
-                                    tl.Moderator.CreateList,
-                                    tl.Moderator.Email,
-                                    tl.Moderator.ID,
-                                    tl.Moderator.SetHotLists,
-                                    tl.Moderator.Status
-                                },
+                            tl.CreatedBy,
+                            tl.Rank,
+                            tl.Status,
+                            tl.Tag,
+                            tl.Title,
+                            tl.image,
+                            tl.Views,
+                            tl.FbShares,
+                            tl.TwitterShares,
+                            tl.Hot,
+                            tl.ListType,
+                            tl.ListDate,
+                            tl.ID,
+                            Moderator = new
+                            {
+                                tl.Moderator.CreateAdmin,
+                                tl.Moderator.CreateList,
+                                tl.Moderator.Email,
+                                tl.Moderator.ID,
+                                tl.Moderator.SetHotLists,
+                                tl.Moderator.Status
+                            },
                                 ListItems=new List<object>((from LI in tl.ListItems
                                                               select new
                                                               {
@@ -420,5 +469,154 @@ namespace Tenzat.Models
                 DataInJSON = List.ToJSON()
             };
         }
+
+        public Returner GetListItems(int _ID)
+        {
+            var getListItem = db.ListItems.Where(p => p.ListID ==_ID).ToList();
+            var getListItemInjson = (from LI in getListItem
+                                  select new
+                                  {
+                                   LI.Order,
+                                   LI.ItemType,
+                                   LI.ID,
+                                   LI.ListID,
+                                   LI.MoreText,
+                                   LI.Title,
+                                   LI.Description,
+                                   LI.Drawable,
+                                   List=new
+                                   {
+                             LI.List.CreatedBy,
+                            LI.List.Rank,
+                            LI.List.Status,
+                            Tag = Enum.GetName(typeof(Tags), LI.List.Tag),
+                            LI.List.Title,
+                            LI.List.image,
+                            LI.List.Views,
+                            LI.List.FbShares,
+                            LI.List.TwitterShares,
+                            LI.List.Hot,
+                            LI.List.ListType,
+                            LI.List.ListDate,
+                            LI.List.ID,
+                            Moderator = new
+                            {
+                                LI.List.Moderator.CreateAdmin,
+                                LI.List.Moderator.CreateList,
+                                LI.List.Moderator.Email,
+                                LI.List.Moderator.ID,
+                                LI.List.Moderator.SetHotLists,
+                                LI.List.Moderator.Status
+                            }
+                                   }
+                                  }).ToList();
+            return new Returner
+            {
+                Data = getListItem,
+                DataInJSON = getListItemInjson.ToJSON()
+            };         
+        }
+
+        public Returner GetHotList()
+        {
+            var Hot = (from L in db.Lists
+                       where L.Hot == true
+                       orderby L.Rank descending
+                       select L).ToList();
+            var HotJson = (from tl in Hot
+                           select new
+                           {
+                               tl.CreatedBy,
+                               tl.Rank,
+                               tl.Status,
+                               Tag = Enum.GetName(typeof(Tags), tl.Tag),
+                               tl.Title,
+                               tl.image,
+                               tl.Views,
+                               tl.FbShares,
+                               tl.TwitterShares,
+                               tl.Hot,
+                               tl.ListType,
+                               tl.ListDate,
+                               tl.ID,
+                               Moderator = new
+                               {
+                                   tl.Moderator.CreateAdmin,
+                                   tl.Moderator.CreateList,
+                                   tl.Moderator.Email,
+                                   tl.Moderator.ID,
+                                   tl.Moderator.SetHotLists,
+                                   tl.Moderator.Status
+                               },
+                               ListItems = new List<object>((from LI in tl.ListItems
+                                                             select new
+                                                             {
+                                                                 LI.Order,
+                                                                 LI.ItemType,
+                                                                 LI.ID,
+                                                                 LI.ListID,
+                                                                 LI.MoreText,
+                                                                 LI.Title,
+                                                                 LI.Description,
+                                                                 LI.Drawable
+                                                             }).Cast<object>().ToList()).Cast<object>().ToList()
+                           }).ToList().FirstOrDefault();
+            return new Returner
+            {
+                Data = Hot.FirstOrDefault(),
+                DataInJSON = HotJson.ToJSON()
+            };
+        }
+
+        public Returner GetRelatedLists(int _ID)
+        {
+            var related = db.Lists.OrderByDescending(p => p.Rank).Where(p => p.ID != _ID).Take(3).ToList();
+            var relatedInJson=(from L in related
+                               select new
+                              {
+                                  L.CreatedBy,
+                                  L.Rank,
+                                  L.Status,
+                                  Tag = Enum.GetName(typeof(Tags), L.Tag),
+                                  L.Title,
+                                  L.image,
+                                  L.Views,
+                                  L.FbShares,
+                                  L.TwitterShares,
+                                  L.Hot,
+                                  L.ListType,
+                                  ListDate,
+                                  L.ID,
+                                  Moderator = new
+                                  {
+                                      L.Moderator.CreateAdmin,
+                                      L.Moderator.CreateList,
+                                      L.Moderator.Email,
+                                      L.Moderator.ID,
+                                      L.Moderator.SetHotLists,
+                                      L.Moderator.Status
+                                  },
+                                  ListItems = new List<object>((from LI in L.ListItems
+                                                                select new
+                                                                {
+                                                                    LI.Order,
+                                                                    LI.ItemType,
+                                                                    LI.ID,
+                                                                    LI.ListID,
+                                                                    LI.MoreText,
+                                                                    LI.Title,
+                                                                    LI.Description,
+                                                                    LI.Drawable
+                                                                }).Cast<object>().ToList()).Cast<object>().ToList()
+                              }).ToList();
+            return new Returner
+            {
+                Data = related,
+                DataInJSON = relatedInJson.ToJSON()
+
+            };
+                              
+        }
+
     }
 }

@@ -2,159 +2,96 @@
     ViewBag.Title = "ViewList";
     Layout = "~/Views/Shared/FrontMaster.cshtml";
 }
-
+<script src="~/Scripts/ViewList.js"></script>
 <script src="~/Scripts/Lists.js"></script>
+<link href="~/content/css/css.css" rel="stylesheet" />
+<!-- Main Wrapper -->
+<div id="main-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="12u">
 
-<html>
-	<head>
-        	<link rel="stylesheet" href="~/content/css/skel-noscript.css" />
-			<link rel="stylesheet" href="~/content/css/style.css" />
-			<link rel="stylesheet" href="~/content/css/style-desktop.css" />
-		<title>Left Sidebar - Dopetrope by HTML5 UP</title>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta name="description" content="" />
-		<meta name="keywords" content="" />
-		<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900,300italic" rel="stylesheet" />
-		<script src=""></script>
-		<script src="js/jquery.dropotron.min.js"></script>
-		<script src="js/config.js"></script>
-		<script src="js/skel.min.js"></script>
-		<script src="js/skel-panels.min.js"></script>
-		<noscript>
+                <!-- Portfolio -->
+                <section>
+                    <div>
+                        <div class="row">
+                            <div class="4u">
 
-		</noscript>
-		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><link rel="stylesheet" href="css/ie8.css" /><![endif]-->
-	</head>
-	<body>
-        <div id="header-wrapper">
-				<div class="container">
-             <div class="row">
-						<div class="12u">
+                                <!-- Sidebar -->
+                                @{
+                                   
+                                    foreach (var r in ViewBag.related)
+                                    {
+                                    <section class="box">
+                                        <a href="/Lists/ViewList?_ID=@r.ID" class="image image-full">
+                                            <img src="@r.image" alt="" />
+                                        </a>
+                                        <header>
+                                            <h3>@r.Title</h3>
+                                        </header>
+                                        <footer>
+                                            <a  href="/Lists/ViewList?_ID=@r.ID" class="button alt">Continue Reading</a>
+                                        </footer>
+                                    </section>
+                                        
+                                    }
+                                }
+                            </div>
+                            <div class="8u skel-cell-important">
 
-							<!-- Banner -->
-								<section id="banner">
-									<a href="http://facebook.com/DreametryDoodle">
-										<span class="image image-full"><img src="~/content/images/pic01.jpg" alt="" /></span>
-										<header>
-											<h2>Howdy. This is Dopetrope.</h2>
-											<span class="byline">A responsive template by HTML5 UP</span>
-										</header>
-									</a>
-								</section>
-
-						</div>
-					</div>
+                                <!-- Content -->
+                                @{
+                                    int counter = 1;
+                                    foreach (var l in ViewBag.getlistitem)
+                                    {
+                                        if (counter == 6)
+                                        {
+                                    <img src="~/content/images/pic10.jpg" style="margin-bottom: 50px; width: 100%" />
+                                               
+                                        }
+                                    <article class="box is-post" style="padding-top: 0; position: relative; float:right;">
+                                        <div class="ordercont">
+                                            <div style="width: 90%; height: 150%; float: right; margin-right: 70px;">
+                                                <p style="text-align: right; height: 100%; line-height: 50px; font-weight:bold; word-wrap: break-word;">@l.Title</p>
+                                            </div>
+                                            <span class="listorder">@l.Order</span>
+                                        </div>
+                                        @if (l.ItemType == 1)
+                                        {
+                                            @*<div class="image image-full">
+                                                <div style="height:auto; width:100%;">*@
+                                                    <iframe style="margin-top:30px; float:right; margin-right:-3.6%; padding:0;" width="107%" height="600" src="@l.Drawable" frameborder="0" allowfullscreen></iframe>
+                                                @*</div>
+                                            </div>*@
+                                        }
+                                        else
+                                        {
+                                            <a href="#" class="image image-full">
+                                                <div class="imglist" style="float: left; margin-top: 0px;">
+                                                    <img src="@l.Drawable" style="height:600px;" alt="" />
+                                                </div>
+                                            </a>
+                                        }
+                                        @*<header>
+                                            <span class="byline">_</span>
+                                        </header>*@
+                                        <p style="text-align: right; float:right; margin-top:40px;">
+                                            @l.Description
+                                        </p>
+                                    </article>
+                                    <div style="height: 30px; width: 100%; float:right;"></div>
+                                        counter++;
+                                    }
+                                }
+                            </div>
+                        </div>
                     </div>
+                </section>
+
             </div>
-		<div class="left-sidebar">
-		<!-- Main Wrapper -->
-			<div id="main-wrapper">
-				<div class="container">
-					<div class="row">
-						<div class="12u">
-							
-							<!-- Portfolio -->
-								<section>
-									<div>
-										<div class="row">
-											<div class="4u">
-											
-												<!-- Sidebar -->
-													<section class="box">
-														<a href="http://facebook.com/DreametryDoodle" class="image image-full"><img src="~/content/images/pic09.jpg" alt="" /></a>
-														<header>
-															<h3>Sed etiam lorem nulla</h3>
-														</header>
-														<p>Lorem ipsum dolor sit amet sit veroeros sed amet blandit consequat veroeros lorem blandit  adipiscing et feugiat phasellus tempus dolore ipsum lorem dolore.</p>
-														<footer>
-															<a href="#" class="button alt">Magna sed taciti</a>
-														</footer>
-													</section>
-													<section class="box">
-														<header>
-															<h3>Feugiat consequat</h3>
-														</header>
-														<p>Veroeros sed amet blandit consequat veroeros lorem blandit adipiscing et feugiat sed lorem consequat feugiat lorem dolore.</p>
-														<ul class="divided">
-															<li><a href="#">Sed et blandit consequat sed</a></li>
-															<li><a href="#">Hendrerit tortor vitae sapien dolore</a></li>
-															<li><a href="#">Sapien id suscipit magna sed felis</a></li>
-															<li><a href="#">Aptent taciti sociosqu ad litora</a></li>
-														</ul>
-														<footer>
-															<a href="#" class="button alt">Ipsum consequat</a>
-														</footer>
-													</section>
-
-											</div>
-											<div class="8u skel-cell-important">
-												
-												<!-- Content -->
-													<article class="box is-post">
-														<a href="http://facebook.com/DreametryDoodle" class="image image-full"><img src="~/content/images/pic01.jpg" alt="" /></a>
-														<span class="listorder">10</span>
-                                                        <header>
-															<h2>Left Sidebar</h2>
-															<span class="byline">Lorem ipsum dolor sit amet feugiat</span>
-														</header>
-														<p>
-															Vestibulum scelerisque ultricies libero id hendrerit. Vivamus malesuada quam faucibus ante dignissim auctor 
-															hendrerit libero placerat. Nulla facilisi. Proin aliquam felis non arcu molestie at accumsan turpis commodo. 
-															Proin elementum, nibh non egestas sodales, augue quam aliquet est, id egestas diam justo adipiscing ante. 
-															Pellentesque tempus nulla non urna eleifend ut ultrices nisi faucibus.
-														</p>
-														<p>
-															Praesent a dolor leo. Duis in felis in tortor lobortis volutpat et pretium tellus. Vestibulum ac ante nisl, 
-															a elementum odio. Duis semper risus et lectus commodo fringilla. Maecenas sagittis convallis justo vel mattis. 
-															placerat, nunc diam iaculis massa, et aliquet nibh leo non nisl vitae porta lobortis, enim neque fringilla nunc, 
-															eget faucibus lacus sem quis nunc suspendisse nec lectus sit amet augue rutrum vulputate ut ut mi. Aenean 
-															elementum, mi sit amet porttitor lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor
-															sit amet nullam consequat feugiat dolore tempus.
-														</p>
-														<section>
-															<header>
-																<h3>Something else</h3>
-															</header>
-															<p>
-																Elementum odio duis semper risus et lectus commodo fringilla. Maecenas sagittis convallis justo vel mattis. 
-																placerat, nunc diam iaculis massa, et aliquet nibh leo non nisl vitae porta lobortis, enim neque fringilla nunc, 
-																eget faucibus lacus sem quis nunc suspendisse nec lectus sit amet augue rutrum vulputate ut ut mi. Aenean 
-																elementum, mi sit amet porttitor lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor
-																sit amet nullam consequat feugiat dolore tempus.
-															</p>
-															<p>
-																Nunc diam iaculis massa, et aliquet nibh leo non nisl vitae porta lobortis, enim neque fringilla nunc, 
-																eget faucibus lacus sem quis nunc suspendisse nec lectus sit amet augue rutrum vulputate ut ut mi. Aenean 
-																elementum, mi sit amet porttitor lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor
-																sit amet nullam consequat feugiat dolore tempus.
-															</p>
-														</section>
-														<section>
-															<header>
-																<h3>So in conclusion ...</h3>
-															</header>
-															<p>
-																Nunc diam iaculis massa, et aliquet nibh leo non nisl vitae porta lobortis, enim neque fringilla nunc, 
-																eget faucibus lacus sem quis nunc suspendisse nec lectus sit amet augue rutrum vulputate ut ut mi. Aenean 
-																elementum, mi sit amet porttitor lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor
-																sit amet nullam consequat feugiat dolore tempus. Elementum odio duis semper risus et lectus commodo fringilla. 
-																Maecenas sagittis convallis justo vel mattis. 
-															</p>
-														</section>
-													</article>
-
-											</div>
-										</div>
-									</div>
-								</section>
-
-						</div>
-					</div>
-				</div>
-			</div>
-            </div>
-	</body>
-</html>
+        </div>
+    </div>
+</div>
 
 
 

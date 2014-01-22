@@ -1046,18 +1046,42 @@ body {
     margin-left:1050px;
 
 }
-.listorder {
-     width: 35px;
-            height: 35px;
-            background-color: yellow;
-            color: #111;
-            position: absolute;
-            top: 2px;
-            right: 2px;
-            font-size: 1.7em;
-            padding: 5px;
-            text-align: center;
-            font-weight: bolder;
-            border-radius: 1000px;
-            opacity: .7;
+
+.imglist {
+    /*position:relative;*/
 }
+
+.listtagcont {
+    width:100%;
+    margin-top:-30px;
+    height:50px;
+}
+.boxtag {
+    float:right;
+    background-color: #e67070;
+    font-size: 2em;
+    text-align: center;
+    width:160px;
+    height:100%;
+    padding-top:10px;
+    color:white;
+}
+.listorder {
+    position:absolute;
+    width: 60px;
+    top:0;
+    right:0;
+    background-color: #e67070;
+    color: white;
+    font-size: 3em;
+    text-align: center;
+    font-weight: bolder;
+    height:60px;
+    padding-top:10px;
+}
+.ordercont {
+    width:100%;
+    height:30px;
+    float:left;
+}
+
