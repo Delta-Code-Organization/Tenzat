@@ -32,7 +32,8 @@ namespace Tenzat.Models
                                   L.ListType,
                                   ListDate,
                                   L.ID,
-                                  Moderator = new {
+                                  Moderator = new
+                                  {
                                       L.Moderator.CreateAdmin,
                                       L.Moderator.CreateList,
                                       L.Moderator.Email,
@@ -80,7 +81,8 @@ namespace Tenzat.Models
                                   L.ListType,
                                   ListDate,
                                   L.ID,
-                                  Moderator = new {
+                                  Moderator = new
+                                  {
                                       L.Moderator.CreateAdmin,
                                       L.Moderator.CreateList,
                                       L.Moderator.Email,
@@ -179,9 +181,9 @@ namespace Tenzat.Models
             };
         }
 
-        public Returner SetHotList(int _ListID)
+        public Returner SetHotList()
         {
-            var hotList =db.Lists.Where(p => p.ID == _ListID).ToList().SingleOrDefault();
+            var hotList =db.Lists.Where(p => p.ID ==this.ID).ToList().SingleOrDefault();
             hotList.Hot = true;
             db.SaveChanges();
             return new Returner 
@@ -192,59 +194,22 @@ namespace Tenzat.Models
             
         }
 
-        //public Returner GetList()
-        //{
-        //    var myList = (from L in db.Lists
-        //                      orderby L.ID descending
-        //                      select L).ToList();
-        //    var customList=(from cl in myList
-        //                    select new
-        //                    {
-        //                        cl.CreatedBy,
-        //                        cl.Rank,
-        //                        cl.Status,
-        //                        cl.Tag,
-        //                        cl.Title,
-        //                        cl.image,
-        //                        cl.Views,
-        //                        cl.FbShares,
-        //                        cl.TwitterShares,
-        //                        cl.Hot,
-        //                        cl.ListType,
-        //                        cl.ListDate,
-        //                        cl.ID,
-        //                        Moderator = new
-        //                        {
-        //                            cl.Moderator.CreateAdmin,
-        //                            cl.Moderator.CreateList,
-        //                            cl.Moderator.Email,
-        //                            cl.Moderator.ID,
-        //                            cl.Moderator.SetHotLists,
-        //                            cl.Moderator.Status
-        //                        },
-        //                        ListItems = new List<object>((from LI in cl.ListItems
-        //                                                      select new
-        //                                                      {
-        //                                                          LI.Order,
-        //                                                          LI.ItemType,
-        //                                                          LI.ID,
-        //                                                          LI.ListID,
-        //                                                          LI.MoreText,
-        //                                                          LI.Title,
-        //                                                          LI.Description,
-        //                                                          LI.Drawable
-        //                                                      }).Cast<object>().ToList()).Cast<object>().ToList()
-        //                    }).ToList();
-        //    return new Returner
-        //    {
-        //        Data = myList,
-        //        DataInJSON =customList.ToJSON()
-        //    };
-        //}
-
-        public Returner GetListByID(int _ID)
+        public Returner NotHot()
         {
-            var myList = db.Lists.Where(p => p.ID ==_ID).ToList();
+            var notHot = db.Lists.Where(p => p.ID == this.ID).ToList().SingleOrDefault();
+            notHot.Hot = false;
+            db.SaveChanges();
+            return new Returner
+            {
+                Data = notHot,
+                Message = Msgs.List_Is_Not_Hot
+
+            };
+        }
+
+        public Returner GetListByID()
+        {
+            var myList = db.Lists.Where(p => p.ID ==this.ID).ToList();
             var myCustomList = (from cl in myList
                               select new
                             {
@@ -290,9 +255,9 @@ namespace Tenzat.Models
             }; 
         }
 
-        public Returner ConfirmList(int _ID)
+        public Returner ConfirmList()
         {
-            var confirm = db.Lists.Where(p => p.ID == _ID).SingleOrDefault();
+            var confirm = db.Lists.Where(p => p.ID == this.ID).SingleOrDefault();
             confirm.Status=(int)ListStatus.Confirmed;
             db.SaveChanges();
             return new Returner
@@ -302,9 +267,9 @@ namespace Tenzat.Models
             };
         }
 
-        public Returner RemoveList(int _ID)
+        public Returner RemoveList()
         {
-            var remove = db.Lists.Where(p => p.ID == _ID).ToList().SingleOrDefault();
+            var remove = db.Lists.Where(p => p.ID == this.ID).ToList().SingleOrDefault();
             remove.Status = (int)ListStatus.Removed;
             db.SaveChanges();
             return new Returner
@@ -327,10 +292,10 @@ namespace Tenzat.Models
             };
         }
 
-        public Returner SearchByTag(int _Tag)
+        public Returner SearchByTag()
         {
             var tag = (from t in db.Lists
-                       where t.Tag == _Tag
+                       where t.Tag == this.Tag
                        select t).ToList();
             var tagList=(from tl in tag
                         select new {
@@ -374,9 +339,9 @@ namespace Tenzat.Models
                 DataInJSON=tagList.ToJSON()
             };
         }
-        public Returner SearchByTitle(string _Title)
+        public Returner SearchByTitle()
         {
-            var searchByTitle = db.Lists.Where(p => p.Title.Contains(_Title)).ToList();
+            var searchByTitle = db.Lists.Where(p => p.Title.Contains(this.Title)).ToList();
             var titleList=(from tl in searchByTitle
                            select new
                            {
@@ -422,9 +387,9 @@ namespace Tenzat.Models
             };         
         }
 
-        public Returner SearchByTItleTag(string _Title, int _Tag)
+        public Returner SearchByTItleTag()
         {
-            var Search = db.Lists.Where(p => p.Title == _Title && p.Tag == _Tag).ToList();
+            var Search = db.Lists.Where(p => p.Title.Contains(this.Title)&& p.Tag == this.Tag).ToList();
             var List = (from tl in Search
                            select new
                            {
@@ -470,9 +435,9 @@ namespace Tenzat.Models
             };
         }
 
-        public Returner GetListItems(int _ID)
+        public Returner GetListItems()
         {
-            var getListItem = db.ListItems.Where(p => p.ListID ==_ID).ToList();
+            var getListItem = db.ListItems.Where(p => p.ListID ==this.ID).OrderByDescending(p=>p.ID).ToList();
             var getListItemInjson = (from LI in getListItem
                                   select new
                                   {
@@ -499,15 +464,15 @@ namespace Tenzat.Models
                             LI.List.ListType,
                             LI.List.ListDate,
                             LI.List.ID,
-                            Moderator = new
-                            {
-                                LI.List.Moderator.CreateAdmin,
-                                LI.List.Moderator.CreateList,
-                                LI.List.Moderator.Email,
-                                LI.List.Moderator.ID,
-                                LI.List.Moderator.SetHotLists,
-                                LI.List.Moderator.Status
-                            }
+                             Moderator = new
+                             {
+                                 LI.List.Moderator.CreateAdmin,
+                                 LI.List.Moderator.CreateList,
+                                 LI.List.Moderator.Email,
+                                 LI.List.Moderator.ID,
+                                 LI.List.Moderator.SetHotLists,
+                                 LI.List.Moderator.Status
+                             }
                                    }
                                   }).ToList();
             return new Returner
@@ -568,9 +533,9 @@ namespace Tenzat.Models
             };
         }
 
-        public Returner GetRelatedLists(int _ID)
+        public Returner GetRelatedLists()
         {
-            var related = db.Lists.OrderByDescending(p => p.Rank).Where(p => p.ID != _ID).Take(3).ToList();
+            var related = db.Lists.OrderByDescending(p => p.Rank).Where(p => p.ID !=this.ID).Take(6).ToList();
             var relatedInJson=(from L in related
                                select new
                               {

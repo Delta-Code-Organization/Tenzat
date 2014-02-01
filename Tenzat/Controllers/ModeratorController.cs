@@ -31,7 +31,9 @@ namespace Tenzat.Controllers
         public string logadmin(string _mail, string _pass)
         {
             Moderator mod = new Moderator();
-            var res = mod.ModeratorLogin(_mail, _pass);
+            mod.Email = _mail;
+            mod.password = _pass;
+            var res = mod.ModeratorLogin();
             var msgres = res.Message.ShowMsg();
             var nmod = res.Data;
             mod = (Moderator)nmod;
@@ -280,15 +282,19 @@ namespace Tenzat.Controllers
             List l = new List();
             if (_title != "" && _tag == 3000)
             {
-                return l.SearchByTitle(_title).DataInJSON;
+                l.Title = _title;
+                return l.SearchByTitle().DataInJSON;
             }
             else if (_title == "" && _tag != 3000)
             {
-                return l.SearchByTag(_tag).DataInJSON;
+                l.Tag = _tag;
+                return l.SearchByTag().DataInJSON;
             }
             else if (_title != "" && _tag != 3000)
             {
-                return l.SearchByTItleTag(_title, _tag).DataInJSON;
+                l.Title = _title;
+                l.Tag = _tag;
+                return l.SearchByTItleTag().DataInJSON;
             }
             return new JsonResult();
         }
@@ -325,19 +331,28 @@ namespace Tenzat.Controllers
         public string Confirm(int _id)
         {
             List l = new List();
-            var res = l.ConfirmList(_id);
+            l.ID = _id;
+            var res = l.ConfirmList();
             return res.Message.ShowMsg();
         }
 
         public string Remove(int _id)
         {
             List l = new List();
-            return l.RemoveList(_id).Message.ShowMsg();
+            l.ID = _id;
+            return l.RemoveList().Message.ShowMsg();
         }
         public string SetHot(int _id)
         {
             List l = new List();
-            return l.SetHotList(_id).Message.ShowMsg();
+            l.ID = _id;
+            return l.SetHotList().Message.ShowMsg();
+        }
+        public string NotHot(int _id)
+        {
+            List l = new List();
+            l.ID = _id;
+            return l.NotHot().Message.ShowMsg();
         }
 
         public JsonResult GetPermission()

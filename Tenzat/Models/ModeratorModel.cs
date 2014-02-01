@@ -14,23 +14,31 @@ namespace Tenzat.Models
 
         public Returner CreateModerator()
         {
-            db.Moderators.Add(this);
-            db.SaveChanges();
-            var lastModerator = db.Moderators.OrderByDescending(p => p.ID).FirstOrDefault();
+            var newMod = db.Moderators.Any(p => p.Email == this.Email);
+            if (newMod == false)
+            {
+                db.Moderators.Add(this);
+                db.SaveChanges();
+                var lastModerator = db.Moderators.OrderByDescending(p => p.ID).FirstOrDefault();
+                return new Returner
+                {
+                    Data = lastModerator,
+                    Message = Msgs.Moderator_Created_Successfully
+                };
+            }
             return new Returner
             {
-                Data = lastModerator,
-                Message = Msgs.Moderator_Created_Successfully
+                Message = Msgs.Email_Already_Used
             };
         }
 
-        public Returner ModeratorLogin(string _Email,string _password)
+        public Returner ModeratorLogin()
         {
-            var login = db.Moderators.Any(p => p.Email == _Email && p.password == _password);
+            var login = db.Moderators.Any(p => p.Email == this.Email && p.password == this.password);
             if (login == true)
             {
                 var Moderator = (from M in db.Moderators
-                                 where M.Email == _Email && M.password == _password
+                                 where M.Email == this.Email && M.password == this.password
                                  select M).SingleOrDefault();
                 return new Returner
                 {
@@ -47,6 +55,7 @@ namespace Tenzat.Models
         public List<Moderator> allmod()
         {
             var all = (from m in db.Moderators
+                       where m.Status!=2
                        select m).ToList();
             return all;
         }
@@ -54,7 +63,8 @@ namespace Tenzat.Models
         public Returner RemoveAdmin()
         {
             var removeAdmin = db.Moderators.Where(p => p.ID == this.ID).ToList().SingleOrDefault();
-            db.Moderators.Remove(removeAdmin);
+           // db.Moderators.Remove(removeAdmin);
+            removeAdmin.Status = (int)ListStatus.Removed;
             db.SaveChanges();
             return new Returner
             {

@@ -17,12 +17,15 @@ namespace Tenzat.Controllers
         {
             List l = new List();
             ViewBag.Ranklists = (l.GetListByRank().Data);
+            List<ListItem> LOL = new List<ListItem>();
             List<int> IDS = new List<int>();
             foreach (List item in ViewBag.Ranklists)
             {
                 int ID = item.ID;
+                LOL.AddRange(item.ListItems);
                 IDS.Add(ID);
             }
+            ViewBag.ListItems = LOL;
             TempData["IDS"] = IDS;
             TempData.Keep();
             return View();
@@ -49,6 +52,11 @@ namespace Tenzat.Controllers
         public JsonResult GetHotList()
         {
             return new List().GetHotList().DataInJSON;
+        }
+
+        public ActionResult Contact()
+        {
+            return View();
         }
     }
 }

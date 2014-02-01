@@ -2,6 +2,7 @@
     ViewBag.Title = "CreateList";
     Layout = "~/Views/Shared/MasterPage.cshtml";
 }
+@using Tenzat.Models;
 <script src="~/Scripts/CreateList.js"></script>
 
 <form id="createlist">
@@ -23,6 +24,7 @@
                @* <input id="Vid" type="text" class="ttbox" />*@
             <label class="titles">Image Path :</label>
                 <input id="ListImg" type="file" class="tebox" />
+                <input id="SDFFDS" type="file" />
             </div>
             <input type="hidden" id="ImageList" value="" />
         </div>
@@ -32,10 +34,10 @@
             <select class="droplist" name="tagdroplist" id="droptag">
                 @{
                     int Val = 0;
+                    <option></option>
                     foreach (string Tag in ViewBag.Tags)
                     {
-                    <option></option>
-                    <option value="@Val">@Tag</option>
+                    <option value="@Val">@Tag.ShowTag()</option>
                         Val++;
                     }
                 }
@@ -64,9 +66,9 @@
             <input type="hidden" id="Image1" value="" />
             <div class="rds">
                 Image
-        <input id="imgItemR" type="radio" name="r1" checked onchange="ChangeImgVid('im1')" />
+        <input id="imgItemR1" type="radio" name="r1" checked onchange="ChangeImgVid('im1')" />
                 Video
-        <input id="vidItemR" type="radio" name="r1" onchange="ChangeImgVid('vd1')" />
+        <input id="vidItemR1" type="radio" name="r1" onchange="ChangeImgVid('vd1')" />
             </div>
         </div>
     </div>
@@ -91,9 +93,9 @@
             <input type="hidden" id="Image2" value="" />
              <div class="rds">
                 Image
-        <input type="radio"  id="ib2" name="r2" checked onchange="ChangeImgVid('im2')" />
+        <input type="radio" id="imgItemR2"  name="r2" checked onchange="ChangeImgVid('im2')" />
                 Video
-        <input type="radio" id="vb2" name="r2" onchange="ChangeImgVid('vd2')" />
+        <input type="radio" id="vidItemR2"  name="r2" onchange="ChangeImgVid('vd2')" />
             </div>
         </div>
     </div>
@@ -118,9 +120,9 @@
             <input type="hidden" id="Image3" value="" />
              <div class="rds">
                 Image
-        <input type="radio" name="r3" checked onchange="ChangeImgVid('im3')" />
+        <input type="radio" id="imgItemR3" name="r3" checked onchange="ChangeImgVid('im3')" />
                 Video
-        <input type="radio" name="r3" onchange="ChangeImgVid('vd3')" />
+        <input type="radio" id="vidItemR3" name="r3" onchange="ChangeImgVid('vd3')" />
             </div>
         </div>
     </div>
@@ -145,9 +147,9 @@
             <input type="hidden" id="Image4" value="" />
              <div class="rds">
                 Image
-        <input type="radio" name="r4" checked onchange="ChangeImgVid('im4')" />
+        <input type="radio" id="imgItemR4" name="r4" checked onchange="ChangeImgVid('im4')" />
                 Video
-        <input type="radio" name="r4" onchange="ChangeImgVid('vd4')" />
+        <input type="radio" id="vidItemR4" name="r4" onchange="ChangeImgVid('vd4')" />
             </div>
         </div>
     </div>
@@ -172,9 +174,9 @@
             <input type="hidden" id="Image5" value="" />
              <div class="rds">
                 Image
-        <input type="radio" name="r5" checked onchange="ChangeImgVid('im5')" />
+        <input type="radio" id="imgItemR5" name="r5" checked onchange="ChangeImgVid('im5')" />
                 Video
-        <input type="radio" name="r5" onchange="ChangeImgVid('vd5')" />
+        <input type="radio" id="vidItemR5" name="r5" onchange="ChangeImgVid('vd5')" />
             </div>
         </div>
     </div>
@@ -199,9 +201,9 @@
             <input type="hidden" id="Image6" value="" />
              <div class="rds">
                 Image
-        <input type="radio" name="r6" checked onchange="ChangeImgVid('im6')" />
+        <input type="radio" id="imgItemR6" name="r6" checked onchange="ChangeImgVid('im6')" />
                 Video
-        <input type="radio" name="r6" onchange="ChangeImgVid('vd6')" />
+        <input type="radio" id="vidItemR6" name="r6" onchange="ChangeImgVid('vd6')" />
             </div>
         </div>
     </div>
@@ -226,9 +228,9 @@
             <input type="hidden" id="Image7" value="" />
              <div class="rds">
                 Image
-        <input type="radio" name="r7" checked onchange="ChangeImgVid('im7')" />
+        <input type="radio" id="imgItemR7" name="r7" checked onchange="ChangeImgVid('im7')" />
                 Video
-        <input type="radio" name="r7" onchange="ChangeImgVid('vd7')" />
+        <input type="radio" id="vidItemR7" name="r7" onchange="ChangeImgVid('vd7')" />
             </div>
         </div>
     </div>
@@ -252,9 +254,9 @@
             <input type="hidden" id="Image8" value="" />
              <div class="rds">
                 Image
-        <input type="radio" name="r8" checked onchange="ChangeImgVid('im8')" />
+        <input type="radio" id="imgItemR8" name="r8" checked onchange="ChangeImgVid('im8')" />
                 Video
-        <input type="radio" name="r8" onchange="ChangeImgVid('vd8')" />
+        <input type="radio" id="vidItemR8" name="r8" onchange="ChangeImgVid('vd8')" />
             </div>
         </div>
     </div>
@@ -278,9 +280,9 @@
             <input type="hidden" id="Image9" value="" />
              <div class="rds">
                 Image
-        <input type="radio" name="r9" checked onchange="ChangeImgVid('im9')" />
+        <input type="radio" id="imgItemR9" name="r9" checked onchange="ChangeImgVid('im9')" />
                 Video
-        <input type="radio" name="r9" onchange="ChangeImgVid('vd9')" />
+        <input type="radio" name="r9" id="vidItemR9" onchange="ChangeImgVid('vd9')" />
             </div>
         </div>
     </div>
@@ -305,9 +307,9 @@
             <input type="hidden" id="Image10" value="" />
              <div class="rds">
                 Image
-        <input type="radio" name="r10" checked onchange="ChangeImgVid('im10')" />
+        <input type="radio" id="imgItemR10" name="r10" checked onchange="ChangeImgVid('im10')" />
                 Video
-        <input type="radio" name="r10" onchange="ChangeImgVid('vd10')" />
+        <input type="radio" id="vidItemR10"name="r10" onchange="ChangeImgVid('vd10')" />
             </div>
         </div>
     </div>

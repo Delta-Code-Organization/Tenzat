@@ -13,6 +13,11 @@ namespace Tenzat.Models
             return Enum.ToString().Replace("_", " ");
         }
 
+        public static string ShowTag(this string Enum)
+        {
+            return Enum.ToString().Replace("_", " ");
+        }
+
         public static JsonResult ToJSON(this object Obj)
         {
             JsonResult JR = new JsonResult {

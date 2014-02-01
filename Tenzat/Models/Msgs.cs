@@ -19,6 +19,8 @@ namespace Tenzat.Models
         List_Item_Created_Successfully = 9,
         List_name_dublicated=10,
         Admin_Deleted_Successfully=11,
-        Admin_Updated_Successfully = 12
+        Admin_Updated_Successfully = 12,
+        Email_Already_Used=13,
+        List_Is_Not_Hot=14
     }
 }

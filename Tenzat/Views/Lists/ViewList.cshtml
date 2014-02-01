@@ -1,10 +1,12 @@
 ﻿@{
     ViewBag.Title = "ViewList";
     Layout = "~/Views/Shared/FrontMaster.cshtml";
-}
+
+   }
+@using Tenzat.Models;
+
 <script src="~/Scripts/ViewList.js"></script>
-<script src="~/Scripts/Lists.js"></script>
-<link href="~/content/css/css.css" rel="stylesheet" />
+@*<link href="~/content/css/css.css" rel="stylesheet" />
 <!-- Main Wrapper -->
 <div id="main-wrapper">
     <div class="container">
@@ -27,10 +29,10 @@
                                             <img src="@r.image" alt="" />
                                         </a>
                                         <header>
-                                            <h3>@r.Title</h3>
+                                            <h3 style="text-align:right;">@r.Title</h3>
                                         </header>
                                         <footer>
-                                            <a  href="/Lists/ViewList?_ID=@r.ID" class="button alt">Continue Reading</a>
+                                            <a  href="/Lists/ViewList?_ID=@r.ID" class="button alt">Read Now</a>
                                         </footer>
                                     </section>
                                         
@@ -58,23 +60,19 @@
                                         </div>
                                         @if (l.ItemType == 1)
                                         {
-                                            @*<div class="image image-full">
-                                                <div style="height:auto; width:100%;">*@
-                                                    <iframe style="margin-top:30px; float:right; margin-right:-3.6%; padding:0;" width="107%" height="600" src="@l.Drawable" frameborder="0" allowfullscreen></iframe>
-                                                @*</div>
-                                            </div>*@
+                                           
+                                                    <iframe style="margin-top:30px; float:right; margin-right:-3.6%; padding:0; width:107%; height:600px;" src="@l.Drawable" frameborder="0" allowfullscreen></iframe>
+                                             
                                         }
                                         else
                                         {
                                             <a href="#" class="image image-full">
-                                                <div class="imglist" style="float: left; margin-top: 0px;">
-                                                    <img src="@l.Drawable" style="height:600px;" alt="" />
+                                                <div style="float: left; margin-top: 0px;">
+                                                    <img src="@l.Drawable" class="imaglist" alt="" />
                                                 </div>
                                             </a>
                                         }
-                                        @*<header>
-                                            <span class="byline">_</span>
-                                        </header>*@
+                                       
                                         <p style="text-align: right; float:right; margin-top:40px;">
                                             @l.Description
                                         </p>
@@ -91,12 +89,81 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 
 
 
 
 
+
+<link href="~/content/css/css.css" rel="stylesheet" />
+
+		
+				<div class="about-page">
+					<div class="about-box">
+						<div class="about-content">
+                            @* <div id="MainList" style="margin-bottom:30px;border-bottom:1px solid rgb(229, 229, 229);padding-bottom:20px;width:100%;height:350px;"></div>*@
+                            <div class="about-section" id="MainList">
+								
+							</div>
+                             @{
+                                    int counter = 1;
+                                    foreach (var l in ViewBag.getlistitem)
+                                    {
+                                         if (counter == 6)
+                                        {
+                                   <div style="border-bottom:1px solid rgb(229, 229, 229);margin-bottom:20px;"><img src="~/content/imgs/pic09.jpg" style="margin-bottom: 30px; width: 100%; height:350px;" /></div> 
+                                         }
+							<div class="about-section">
+                                <span class="listorder">@l.Order</span>
+                                <div style="padding-top:10px;margin-right:60px;"><h1 style="text-align:right;">@l.Title</h1></div>
+                                 @if (l.ItemType == 1)
+                                 {
+                                   <iframe style="height:350px;width:100%;" src="@l.Drawable" frameborder="0" allowfullscreen></iframe>
+                                 }
+                                        else
+                                        {
+								<img alt="" src="@l.Drawable" style="height:350px;">
+                                 }
+								<p style="text-align:right;">@l.Description </p>
+								
+							</div>
+                                  counter++;
+                                    }
+                                }
+							<div class="about-section last-section">
+								<h1 style="text-align:right;text-decoration:underline">.. مواضيع ذات صله </h1>
+								<div class="team-members">
+									<div class="row">
+										 @{
+                                    foreach (var r in ViewBag.related)
+                                    {
+										<div class="col-md-4" style="height:350px;">
+							<div class="inner-post">
+								 <a href="/Lists/ViewList?_ID=@r.ID"><img alt="" style="height: 150px;width: 100%;" src="@r.image"></a>
+								<div class="post-content">
+									<h2 style="text-align:right;"><a href="/Lists/ViewList?_ID=@r.ID">@r.Title</a></h2>
+                                    <a  href="/Lists/ViewList?_ID=@r.ID" class="button alt">Read Now</a>
+								</div>
+								<ul class="post-tags">
+									<li><a href="#"><i class="fa fa-comment"></i>@((Enum.GetName(typeof(Tags),r.Tag) as string).ShowTag())</a></li>
+									<li><a href="#"><i class="fa fa-calendar"></i>Dec 19, 2013</a></li>
+								</ul>
+							</div>
+										</div>
+                                         }
+                                         }
+                                        
+                                         
+									</div>
+								</div>							
+							</div>
+						</div>
+						
+					</div>
+				</div>
+		
+		
 
 
 

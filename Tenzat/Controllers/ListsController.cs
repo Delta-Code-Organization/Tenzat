@@ -17,11 +17,11 @@ namespace Tenzat.Controllers
         public ActionResult ViewList(int _ID)
         {
             List l = new List();
-            var res = l.GetListItems(_ID).Data;
+            l.ID = _ID;
+            ViewBag.getlistitem = l.GetListItems().Data;
             TempData["listid"]=_ID;
             TempData.Keep();
-            ViewBag.getlistitem = res;
-            ViewBag.related = l.GetRelatedLists(_ID).Data;
+            ViewBag.related = l.GetRelatedLists().Data;
             return View();
         }
 
@@ -29,7 +29,8 @@ namespace Tenzat.Controllers
         {
             List l = new List();
             int _ID =(int)TempData["listid"];
-      return l.GetListByID(_ID).DataInJSON ;
+            l.ID = _ID;
+      return l.GetListByID().DataInJSON ;
         }
     }
 }

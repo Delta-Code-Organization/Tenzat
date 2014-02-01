@@ -27,20 +27,24 @@ function Show() {
 
 
 $(document).ready(function () {
-   // document.getElementById("RImg").checked = true
+    // document.getElementById("RImg").checked = true
     var ImageInBase64;
 
     $("#ListImg").change(function (e) {
+        alert("sdsdsds");
         readImagesFromUploader(e);
         var interval = setInterval(function () {
             if (ImageInBase64 != undefined && ImageInBase64 != null) {
                 $('#ImageList').val(ImageInBase64);
+                alert("sss");
                 clearInterval(interval);
             }
-    });        }, 1000);
+        }, 1000);
+    });
 
 
     $("#FileImage").change(function (e) {
+        alert("changed");
         readImagesFromUploader(e);
         var interval = setInterval(function () {
             if (ImageInBase64 != undefined && ImageInBase64 != null) {
@@ -289,16 +293,23 @@ function ChangeImgVid(id) {
                 },
                 submitHandler: function (form) {
                     $(function () {
-                      //  alert('submit ok');
-                        //VALIDATE IMAGE
-                        //for(var i=1;i<=10;i++)
-                        //{
-                        //    if ($('#img' + i).attr('src') == "/content/imgs/file-upload.jpg")
-                        //    {
-                        //        alert('You must Upload Image to every List item !');
-                        //        return;
-                        //    }
-                        //}
+
+                        for(var i=1;i<=10;i++)
+                        {
+                            if ($('#imgItemR' + i).is(':checked'))
+                            {
+                                if ($('#img' + i).attr('src') == "/content/imgs/file-upload.jpg") {
+                                    alert('You must Upload Image to List item !');
+                                    return;
+                                }
+                            }
+                            if ($('#vidItemR' + i).is(':checked'))
+                            {
+                                if ($('#LIVID' + i).val() == "") {
+                                    alert('You must Upload Video to List item !');
+                                }
+                            }
+                        }
 
                         var ListTitle = $('#ListTitle').val();
                         var Image = 0;
@@ -310,6 +321,7 @@ function ChangeImgVid(id) {
                         var ListOfVideos = "";
                         //if ($('#RImg').is(':checked')) {
                         Image = $('#ImageList').val();
+                        alert(Image);
                         //    listType = 'Img';
                         //}
                         //if ($('#RVid').is(':checked')) {

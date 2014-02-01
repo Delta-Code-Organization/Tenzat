@@ -6,7 +6,7 @@
 @using Tenzat.Models;
 
 <script src="~/Scripts/Index.js"></script>
-<link href="~/content/css/css.css" rel="stylesheet" />
+@*<link href="~/content/css/css.css" rel="stylesheet" />
 <div id="main-wrapper">
     <div class="container">
         <div class="row">
@@ -22,17 +22,15 @@
                                 foreach (var l in ViewBag.Ranklists)
                                 {
                                 <div class="4u" style="margin-bottom: 50px;">
-                                    <section class="box">
+                                    <section class="box" style=" height:500px; position:relative;">
                                         <a href="/Lists/ViewList?_ID=@l.ID" class="image image-full">
                                             <img src="@l.image" alt="" /></a>
-                                        <div class="listtagcont">
-                                          <div class="boxtag"> <span>@Enum.GetName(typeof(Tags),l.Tag)</span></div> 
-                                        </div>
+                                          <div class="boxtag"> <span>@((Enum.GetName(typeof(Tags),l.Tag) as string).ShowTag())</span></div> 
                                         <header>
-                                            <h3>@l.Title</h3>
+                                            <h3 style="text-align:right;">@l.Title</h3>
                                         </header>
                                         <footer>
-                                            <a href="/Lists/ViewList?_ID=@l.ID"  class="button fa fa-file-text" >Continue Reading</a>
+                                            <a href="/Lists/ViewList?_ID=@l.ID"  class="button fa fa-file-text" style="background-color:#000;" >Read Now</a>
                                         </footer>
                                     </section>
                                   
@@ -47,4 +45,56 @@
             </div>
         </div>
     </div>
+</div>*@
+
+@using Tenzat.Models;
+<div class="blog-page">
+    <div class="blog-box" id="scrollcont">
+
+        <!-- blog-post -->
+        @{
+            foreach (List l in ViewBag.Ranklists)
+            {
+                List<ListItem> loli = ViewBag.ListItems as List<ListItem>;
+                List<ListItem> Ltosearch = loli.Where(p => p.ListID == l.ID).ToList();
+            <div class="blog-post gallery-post">
+                <div class="inner-post">
+                    <div class="flexslider">
+                        <ul class="slides">
+                            <li>
+                                <a href="/Lists/ViewList?_ID=@l.ID" >
+                                    <img alt="" style="height:150px;" src="@l.image" /></a>
+                            </li>
+                            @{
+                foreach (ListItem li in Ltosearch)
+                {
+                                <li>
+                                    <a href="/Lists/ViewList?_ID=@l.ID" >
+                                        <img alt="" style="height:150px;" src="@li.Drawable" /></a>
+                                </li>
+                }
+                            }
+                        </ul>
+                    </div>
+                    <div class="post-content">
+                        <h2 style="text-align: right;"><a href="/Lists/ViewList?_ID=@l.ID">@l.Title</a></h2>
+                        <a  href="/Lists/ViewList?_ID=@l.ID" class="button alt">Read Now</a>
+                        @*<a href="/Lists/ViewList?_ID=@l.ID" style="background-color:#000;color:white;" >Read Now</a>*@
+                    </div>
+                    <ul class="post-tags">
+                        <li><a href="#"><i class="fa fa-comment"></i>@((Enum.GetName(typeof(Tags), l.Tag) as string).ShowTag())</a></li>
+                        <li><a href="#"><i class="fa fa-calendar"></i>Dec 19, 2013</a></li>
+                    </ul>
+                </div>
+            </div>
+            }
+        }
+
+    </div>
+
+    @*	<a class="blog-page-link" href="#">Older Posts</a>*@
 </div>
+@*<div class="blog-page" >
+					<div class="blog-box"  >
+                        </div>
+            </div>*@

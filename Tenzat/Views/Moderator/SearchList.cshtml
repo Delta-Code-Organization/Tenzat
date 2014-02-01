@@ -17,10 +17,11 @@
      <select class="droplist1" id="droptag">
           @{
                 int Val = 0;
-                foreach (string Tag in ViewBag.Tags)
-                {
-     <option value="3000"></option>
-      <option value="@Val"> @Tag</option>
+                <option value="3000"></option>
+              foreach (string Tag in ViewBag.Tags)
+              {
+     
+      <option value="@Val"> @Tag.ShowTag()</option>
       Val++;
       }
       }

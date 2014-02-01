@@ -643,6 +643,7 @@ body {
 .titles {
     color: #08e;
     float: left;
+    font-size:x-large;
 }
 
 .txtbx {
@@ -1051,33 +1052,16 @@ body {
     /*position:relative;*/
 }
 
-.listtagcont {
-    width:100%;
-    margin-top:-30px;
-    height:50px;
-}
-.boxtag {
-    float:right;
-    background-color: #e67070;
-    font-size: 2em;
-    text-align: center;
-    width:160px;
-    height:100%;
-    padding-top:10px;
-    color:white;
-}
 .listorder {
-    position:absolute;
-    width: 60px;
-    top:0;
-    right:0;
-    background-color: #e67070;
+    width: 50px;
+    height: 50px;
+    right: 0px;
+    background-color:#444;
     color: white;
     font-size: 3em;
     text-align: center;
-    font-weight: bolder;
-    height:60px;
-    padding-top:10px;
+    height: 60px;
+    float: right;
 }
 .ordercont {
     width:100%;
