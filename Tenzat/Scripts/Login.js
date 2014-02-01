@@ -11,7 +11,7 @@ JQUERY4U.UTIL =
                 },
                 Adminpass: {
                     minlength:5,
-                    required: true     
+                    required: true
                 }
             },
             messages: {
@@ -34,8 +34,12 @@ JQUERY4U.UTIL =
                         type: 'post',
                         data: admindata,
                         success: function (data) {
-                            $('#logres').text(data);
-                            window.location.href = '/Moderator/ControlPanel';
+                            if (data != 'Successful Login') {
+                                $('#logres').text(data);
+                            }
+                            else {
+                                window.location.href = '/Moderator/ControlPanel';
+                            }
                         },
                         error:function(data){
                             alert(data.responseText);

@@ -342,12 +342,14 @@ namespace Tenzat.Controllers
             l.ID = _id;
             return l.RemoveList().Message.ShowMsg();
         }
+
         public string SetHot(int _id)
         {
             List l = new List();
             l.ID = _id;
             return l.SetHotList().Message.ShowMsg();
         }
+
         public string NotHot(int _id)
         {
             List l = new List();

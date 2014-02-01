@@ -1393,13 +1393,13 @@ ul.depth li:before {
 }
 
 .text-fields {
-    float: left;
+    float: right;
     width: 50%;
     padding-right: 10px;
 }
 
 .submit-area {
-    float: right;
+    float: left;
     width: 50%;
 }
 
@@ -1409,7 +1409,7 @@ ul.depth li:before {
 
 .float-input {
     position: relative;
-    padding-left: 58px;
+    padding-right: 58px;
 }
 
 .float-input span {
@@ -1418,7 +1418,7 @@ ul.depth li:before {
     height: 58px;
     border: 1px solid #eaeaea;
     top: 0px;
-    left: 0px;
+    right: 0px;
     z-index: 2;
     text-align: center;
 }

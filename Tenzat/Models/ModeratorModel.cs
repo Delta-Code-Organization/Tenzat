@@ -40,11 +40,21 @@ namespace Tenzat.Models
                 var Moderator = (from M in db.Moderators
                                  where M.Email == this.Email && M.password == this.password
                                  select M).SingleOrDefault();
-                return new Returner
+                if (Moderator.Status == 2)
                 {
-                    Data = Moderator,
-                    Message = Msgs.Successful_Login
-                };
+                    return new Returner
+                    {
+                        Message = Msgs.Your_account_have_been_removed
+                    };
+                }
+                else
+                {
+                    return new Returner
+                    {
+                        Data = Moderator,
+                        Message = Msgs.Successful_Login
+                    };
+                }
             }
             return new Returner
             {

@@ -23,6 +23,12 @@
 
 var _throttleTimer = null;
 var _throttleDelay = 100;
+var counter = 0;
+
+function convertDate(inputFormat) {
+    var d = new Date(inputFormat);
+    return [d.getMonth() + 1, d.getDate(), d.getFullYear()].join('/');
+}
 
 $(document).ready(function () {
     $(window)
@@ -61,47 +67,41 @@ function ScrollHandler(e) {
                         return;
                     }
                     $.each(data, function (index, List) {
-                        $('.blog-box').append('<div class="blog-post gallery-post">'
-							+'<div class="inner-post">'
-								+'<div class="flexslider">'
-									+'<ul class="slides">'
-									+'<li>'
-										+'<img alt="" src="'+List.image+'" />'
-										+'</li>'
-										+'<li>'
-										+	'<img alt="" src="'+List.image+'" />'
-										+'</li>'
-									+'</ul>'
-								+'</div>'
-								+'<div class="post-content">'
+                        var milli = List.ListDate.replace(/\/Date\((-?\d+)\)\//, '$1');
+                        var LD = new Date(parseInt(milli));
+                        var $newItems = $('<div class="blog-post gallery-post">'
+							+ '<div class="inner-post">'
+								+ '<div class="flexslider">'
+									+ '<ul class="slides" id="ImageSlider' + counter + '">'
+									+ '<li>'
+                                    + '<a href="/Lists/ViewList?_ID=' + List.ID + '" >'
+										+ '<img alt="" style="height:200px;" src="' + List.image + '" /></a>'
+										+ '</li>'
+									+ '</ul>'
+								+ '</div>'
+								+ '<div class="post-content">'
 									+ '<h2 style="text-align:right;">' + '<a href="/Lists/ViewList?_ID=' + List.ID + '">' + List.Title + '</a></h2>'
-									+'<a href="/Lists/ViewList?_ID='+List.ID+'" class="button alt">Read Now</a>'
-								+'</div>'
-								+'<ul class="post-tags">'
-									+'<li><a href="#"><i class="fa fa-comment"></i>'+ List.Tag.replace(/_/g, " ")+'</a></li>'
-									+'<li><a href="#"><i class="fa fa-calendar"></i>Dec 19, 2013</a></li>'
-								+'</ul>'					
-							+'</div>'
-						+ '</div>');
-
-
-
-                        //$('#ListCont').append('<div class="4u" style="margin-bottom: 50px;">'
-                        //            + '<section class="box" style=" height:500px; position:relative;">'
-                        //                + '<a href="/Lists/ViewList?_ID=' + List.ID + '" class="image image-full">'
-                        //                    + '<img src="' + List.image + '" alt="" /></a>'
-                        //                     + ' <div class="listtagcont">'
-                        //                + ' <div class="boxtag"> <span>' + List.Tag.replace(/_/g, " ") + '</span></div>'
-                        //               + ' </div>'
-                        //                + '<header>'
-                        //                    + '<h3 style="text-align:right;">' + List.Title + '</h3>'
-                        //                + '</header>'
-                        //                + '<footer>'
-                        //                    + '<a href="/Lists/ViewList?_ID=' + List.ID + '"  class="button fa fa-file-text" style="background-color:#000;" >Read Now</a>'
-                        //                + '</footer>'
-                        //            + '</section>'
-                        //        + '</div>');
+									+ '<a href="/Lists/ViewList?_ID=' + List.ID + '" class="button alt">اقرأ المزيد</a>'
+								+ '</div>'
+								+ '<ul class="post-tags">'
+									+ '<li><a href="#"><i class="fa fa-comment"></i>' + List.Tag.replace(/_/g, " ") + '</a></li>'
+									+ '<li><a href="#"><i class="fa fa-calendar"></i>' + convertDate(LD) + '</a></li>'
+								+ '</ul>'
+							+ '</div>'
+						+ '</div>')
+                        $('.blog-box').append($newItems).isotope('addItems', $newItems).isotope('appended', $newItems);
+                        $.each(List.ListItems, function (index, LI) {
+                            $('#ImageSlider' + counter).append('<li>'
+                                + '<a href="/Lists/ViewList?_ID=' + List.ID + '" >'
+										+ '<img alt="" style="height:200px;" src="' + LI.Drawable + '" /></a>'
+										+ '</li>');
+                        });
+                        counter++;
                     });
+                    $('.flexslider').flexslider();
+                    setTimeout(function () {
+                        $('.blog-box').isotope('reLayout');
+                    }, 100);
                 },
                 error: function (data) {
                     alert(data.responseText);

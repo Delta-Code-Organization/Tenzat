@@ -63,14 +63,14 @@
                         <ul class="slides">
                             <li>
                                 <a href="/Lists/ViewList?_ID=@l.ID" >
-                                    <img alt="" style="height:150px;" src="@l.image" /></a>
+                                    <img alt="" style="height:200px;" src="@l.image" /></a>
                             </li>
                             @{
                 foreach (ListItem li in Ltosearch)
                 {
                                 <li>
                                     <a href="/Lists/ViewList?_ID=@l.ID" >
-                                        <img alt="" style="height:150px;" src="@li.Drawable" /></a>
+                                        <img alt="" style="height:200px;" src="@li.Drawable" /></a>
                                 </li>
                 }
                             }
@@ -78,12 +78,12 @@
                     </div>
                     <div class="post-content">
                         <h2 style="text-align: right;"><a href="/Lists/ViewList?_ID=@l.ID">@l.Title</a></h2>
-                        <a  href="/Lists/ViewList?_ID=@l.ID" class="button alt">Read Now</a>
+                        <a  href="/Lists/ViewList?_ID=@l.ID" class="button alt">اقرأ المزيد</a>
                         @*<a href="/Lists/ViewList?_ID=@l.ID" style="background-color:#000;color:white;" >Read Now</a>*@
                     </div>
                     <ul class="post-tags">
                         <li><a href="#"><i class="fa fa-comment"></i>@((Enum.GetName(typeof(Tags), l.Tag) as string).ShowTag())</a></li>
-                        <li><a href="#"><i class="fa fa-calendar"></i>Dec 19, 2013</a></li>
+                        <li><a href="#"><i class="fa fa-calendar"></i>@(((DateTime)l.ListDate).ToShortDateString())</a></li>
                     </ul>
                 </div>
             </div>

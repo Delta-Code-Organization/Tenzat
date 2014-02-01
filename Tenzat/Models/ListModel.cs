@@ -14,7 +14,7 @@ namespace Tenzat.Models
 
         public Returner GetListByDAte()
         {
-            var getListByDate = db.Lists.OrderByDescending(p => p.ListDate).ToList();
+            var getListByDate = db.Lists.Where(p => p.Status == 1).OrderByDescending(p => p.ListDate).ToList();
 
             var CustomList = (from L in getListByDate
                               select new
@@ -64,7 +64,7 @@ namespace Tenzat.Models
 
         public Returner GetListByRank()
         {
-            var getListByRank = db.Lists.OrderByDescending(p => p.Rank).ToList().Take(6);
+            var getListByRank = db.Lists.Where(p => p.Status == 1).OrderByDescending(p => p.Rank).ToList().Take(9);
             var CustomList = (from L in getListByRank
                               select new
                               {
@@ -113,7 +113,7 @@ namespace Tenzat.Models
 
         public Returner GetListByRankAjax(List<int> IDS)
         {
-            var getListByRank = db.Lists.OrderByDescending(p => p.Rank).Where(p => !IDS.Contains(p.ID)).Take(6).ToList();
+            var getListByRank = db.Lists.Where(p => p.Status == 1).OrderByDescending(p => p.Rank).Where(p => !IDS.Contains(p.ID)).Take(6).ToList();
             var CustomList = (from L in getListByRank
                               select new
                               {
@@ -128,7 +128,7 @@ namespace Tenzat.Models
                                   L.TwitterShares,
                                   L.Hot,
                                   L.ListType,
-                                  ListDate,
+                                  L.ListDate,
                                   L.ID,
                                   Moderator = new
                                   {
@@ -535,7 +535,7 @@ namespace Tenzat.Models
 
         public Returner GetRelatedLists()
         {
-            var related = db.Lists.OrderByDescending(p => p.Rank).Where(p => p.ID !=this.ID).Take(6).ToList();
+            var related = db.Lists.Where(p => p.Status == 1).OrderByDescending(p => p.Rank).Where(p => p.ID != this.ID).Take(6).ToList();
             var relatedInJson=(from L in related
                                select new
                               {

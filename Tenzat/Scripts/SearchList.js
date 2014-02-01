@@ -43,7 +43,7 @@ function searching() {
                         $('.' + counter).append('<input type="submit" value="Set Hot" class="setbtn" onclick="Hot(' + res.ID + ')">');
                     }
                     else {
-                        $('.' + counter).append('<input type="submit" value="Not Hot" class="setbtn" onclick="Hot(' + res.ID + ')">');
+                        $('.' + counter).append('<input type="submit" value="Not Hot" class="setbtn" onclick="NotHot(' + res.ID + ')">');
                     }
                 }
                 if (ApproveList == true) {

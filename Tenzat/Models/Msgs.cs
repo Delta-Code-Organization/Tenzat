@@ -21,6 +21,7 @@ namespace Tenzat.Models
         Admin_Deleted_Successfully=11,
         Admin_Updated_Successfully = 12,
         Email_Already_Used=13,
-        List_Is_Not_Hot=14
+        List_Is_Not_Hot=14,
+        Your_account_have_been_removed = 15
     }
 }

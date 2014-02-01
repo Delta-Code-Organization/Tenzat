@@ -31,12 +31,10 @@ $(document).ready(function () {
     var ImageInBase64;
 
     $("#ListImg").change(function (e) {
-        alert("sdsdsds");
         readImagesFromUploader(e);
         var interval = setInterval(function () {
             if (ImageInBase64 != undefined && ImageInBase64 != null) {
                 $('#ImageList').val(ImageInBase64);
-                alert("sss");
                 clearInterval(interval);
             }
         }, 1000);
@@ -44,7 +42,6 @@ $(document).ready(function () {
 
 
     $("#FileImage").change(function (e) {
-        alert("changed");
         readImagesFromUploader(e);
         var interval = setInterval(function () {
             if (ImageInBase64 != undefined && ImageInBase64 != null) {
@@ -321,7 +318,6 @@ function ChangeImgVid(id) {
                         var ListOfVideos = "";
                         //if ($('#RImg').is(':checked')) {
                         Image = $('#ImageList').val();
-                        alert(Image);
                         //    listType = 'Img';
                         //}
                         //if ($('#RVid').is(':checked')) {

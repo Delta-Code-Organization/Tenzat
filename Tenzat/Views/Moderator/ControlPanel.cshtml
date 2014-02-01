@@ -11,18 +11,17 @@
     @{
         if (M.CreateAdmin == true)
         {
-            <div class="firstbox" id="1" onmouseover="myfunction(this.id);" onclick="ModeratorManager()" onmouseout="myfunction2(this.id)">
+            <div class="firstbox" id="1" onmouseover="myfunction(this.id);" onclick="ModeratorManager()" onmouseout="myfunction2(this.id)" style="cursor:pointer">
             <a class="words" href="#">Create Admin</a>
             <img class="panelimage" src="/Content/imgs/settings.png" >
         </div>
         }
         }
-        
-        
+       
        @{
         if (M.CreateList == true)
         { 
-        <div class="secondbox" id="2" onmouseover="myfunction(this.id);" onmouseout="myfunction2(this.id)" onclick="creatlist()">
+        <div class="secondbox" id="2" onmouseover="myfunction(this.id);" onmouseout="myfunction2(this.id)" onclick="creatlist()" style="cursor:pointer">
             <a class="words" href="#">Create List</a>
             <img class="panelimage" src="/Content/imgs/settings.png">
         </div>
@@ -32,7 +31,7 @@
         @{
         if (M.SetHotLists == true || M.ApproveLists == true)
         {
-    <div class="fifthbox" id="5" onmouseover="myfunction(this.id);" onclick="Serchlist()" onmouseout="myfunction2(this.id)" >
+    <div class="fifthbox" id="5" onmouseover="myfunction(this.id);" onclick="Serchlist()" onmouseout="myfunction2(this.id)" style="cursor:pointer">
         <a class="words" href="#"> Manage List</a>
         <img class="panelimage" src="/Content/imgs/settings.png">
     </div>
@@ -42,7 +41,7 @@
     @{
         if (M.CreateAdmin == true)
         {
-    <div class="Sixthbox" id="6" onmouseover="myfunction(this.id);" onclick="Modify()" onmouseout="myfunction2(this.id)">
+    <div class="Sixthbox" id="6" onmouseover="myfunction(this.id);" onclick="Modify()" onmouseout="myfunction2(this.id)" style="cursor:pointer">
         <a class="words" href="#">Modify Admin</a>
         <img class="panelimage" src="/Content/imgs/settings.png">
     </div>
