@@ -16,7 +16,7 @@ namespace Tenzat.Controllers
         public ActionResult Index()
         {
             List l = new List();
-            ViewBag.Ranklists = (l.GetListByRank().Data);
+            ViewBag.Ranklists = (l.GetListByDAte().Data);
             List<ListItem> LOL = new List<ListItem>();
             List<int> IDS = new List<int>();
             foreach (List item in ViewBag.Ranklists)
@@ -57,6 +57,18 @@ namespace Tenzat.Controllers
         public ActionResult Contact()
         {
             return View();
+        }
+
+        public ActionResult About()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public void SendMessage(FormCollection FC)
+        {
+            Helper H = new Helper();
+            H.SendEmail(FC["name"], "info@tenzat.com", "Email: " + FC["mail"] + "<br />" + "Message: " + FC["comment"]);
         }
     }
 }

@@ -3,6 +3,70 @@
     Layout = "~/Views/Shared/FrontMaster.cshtml";
 }
 
+<script type="text/javascript">
+    (function ($, W, D) {
+        var JQUERY4U = {};
+        JQUERY4U.UTIL =
+        {
+            setupFormValidation: function () {
+                $("#contact-form").validate({
+                    rules: {
+                        comment: {
+                            required: true
+                        },
+                        name: {
+                            required: true
+                        },
+                        mail: {
+                            required: true,
+                            email:true
+                        },
+                        website: {
+                            required: true
+                        }
+                    },
+                    messages: {
+                        comment: {
+                            required: "الرجاء ادخال الرسالة"
+                        },
+                        name: {
+                            required: "الرجاء ادخال الاسم"
+                        },
+                        mail: {
+                            required: "الرجاء ادخال الإيميل",
+                            email:"الرجاء ادخال ايميل صحيح"
+                        },
+                        website: {
+                            required: "الرجاء ادخال الموقع"
+                        }
+                    },
+                    submitHandler: function (form) {
+                        $(function () {
+                            var data = $('#contact-form').serialize();
+                            alert(data);
+                            $.ajax({
+                                url: '/Home/SendMessage',
+                                type: 'post',
+                                data: data,
+                                success: function (data) {
+                                    $("#MSG").fadeIn(500);
+                                },
+                                error: function (data) {
+                                    alert(data.responseText);
+                                }
+                            });
+                        });
+                    }
+                });
+            }
+        }
+        $(D).ready(function ($) {
+            JQUERY4U.UTIL.setupFormValidation();
+        });
+
+    })(jQuery, window, document);
+</script>
+
 <div class="contact-page">
 					<div id="map">
 					</div>
@@ -13,12 +77,7 @@
 						</div>*@
 						<form id="contact-form">
 							<h1 style="text-align:right;">أتصل بنا</h1>
-							<div class="submit-area">
-								<textarea name="comment" id="comment" placeholder="أكتب رسالة"></textarea>
-								<input type="submit" id="submit_contact" class="main-button" value="أرسال">
-								<div id="msg" class="message"></div>
-							</div>
-
+                            
                             <div class="text-fields">
 								<div class="float-input">
 									<input name="name" id="name" type="text" placeholder="الأسم">
@@ -33,6 +92,15 @@
 									<span><i class="fa fa-link"></i></span>
 								</div>
 							</div>
+
+                            <div class="submit-area">
+								<textarea name="comment" id="comment" placeholder="أكتب رسالة"></textarea>
+								<input type="submit" class="main-button" value="أرسال">
+								<div id="msg" class="message"></div>
+							</div>
 						</form>
+                        <div id="MSG" style="width:100%; height:auto; display:none;">
+                            <h4 style="width:100%;color:rgb(26, 181, 179); text-align:center;">تم ارسال الرسالة بنجاح</h4>
+                        </div>
 					</div>
 				</div>

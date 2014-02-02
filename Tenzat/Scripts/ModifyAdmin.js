@@ -28,10 +28,11 @@ function AddModeratorPopup(id) {
             $('#email').val(data.Email);
             $('#pass').val(data.password);
             $('#confirmPass').val(data.password);
+            alert(data.CreateAdmin + " , " + data.CreateList + " , " + data.SetHotLists + " , " + data.ApproveLists);
             $('#ismod').attr('checked', data.CreateAdmin);
             $('#Cat').attr('checked', data.CreateList);
-            $('#SRC').attr('checked', data.SethotList);
-            $('#Env').attr('checked', data.ApproveList);
+            $('#SRC').attr('checked', data.SetHotLists);
+            $('#Env').attr('checked', data.ApproveLists);
         },
         error: function (data) {
             alert(data.responseText);

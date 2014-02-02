@@ -103,6 +103,13 @@
 	    height: auto !important;
 	}
 
+    .about-box {
+        width: 100%;
+        margin-left:0;
+        background: #fff;
+        overflow: hidden;
+    }
+
 	.logo-box p.slogan {
 		display: none;
 	}
